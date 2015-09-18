@@ -7,8 +7,12 @@
 //#include "p2DynArray.h"
 
 #include "SDL/include/SDL.h"
+#include "PhysFS\include\physfs.h"
+
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
+#pragma comment( lib, "PhysFS/libx86/physfs.lib" )
+
 
 enum MainState
 {

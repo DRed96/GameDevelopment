@@ -4,13 +4,16 @@
 #include "j1Module.h"
 #include "SDL/include/SDL.h"
 #include "SDL_image\include\SDL_image.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 class LoadData
 {
 public:
 	LoadData();
 	~LoadData();
 
-	SDL_RWops* LoadFiles(char *);
+	SDL_RWops* LoadFile_RW(char *);
+	SDL_Texture* LoadTexture(SDL_RWops*);
+	SDL_AudioSpec* LoadAudio(SDL_RWops *);
 private:
 	SDL_RWops* toLoad_RW = NULL;
 };

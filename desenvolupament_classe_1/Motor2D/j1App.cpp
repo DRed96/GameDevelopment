@@ -20,7 +20,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	win = new j1Window();
 	render = new j1Render();
 	tex = new j1Textures();
-	//audio = new j1Audio();
+	audio = new j1Audio();
 	scene = new j1Scene();
 	phys_lib = new j1Physlib();
 
@@ -29,7 +29,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
-	//AddModule(audio);
+	AddModule(audio);
 	AddModule(scene);
 	AddModule(phys_lib);
 	// render last to swap buffer

@@ -31,6 +31,9 @@
     <ClCompile Include="j1Physlib.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1LoadData.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="j1Physlib.h">
       <Filter>Desenvolupament  ========</Filter>
+    </ClInclude>
+    <ClInclude Include="j1LoadData.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

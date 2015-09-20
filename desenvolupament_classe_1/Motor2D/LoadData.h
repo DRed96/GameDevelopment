@@ -11,9 +11,9 @@ public:
 	LoadData();
 	~LoadData();
 
-	SDL_RWops* LoadFile_RW(char *);
-	SDL_Surface* LoadImages(SDL_RWops*);
-	Mix_Chunk* LoadAudio(SDL_RWops *);
+	SDL_RWops* LoadFile_RW(char * filename);
+	SDL_Texture* LoadImages(char *filename);
+	Mix_Chunk* LoadAudio(char *filename);
 
 };
 

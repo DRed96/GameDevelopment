@@ -2,14 +2,14 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Render.h"
-LoadData::LoadData()
-{
+#include "j1Textures.h"
 
-}
+LoadData::LoadData()
+{}
 
 LoadData::~LoadData()
-{
-}
+{}
+
 /*
 Crear modul i mètode loadfile amb SDL_RWops
 Audio i image
@@ -28,25 +28,51 @@ SDL_RWops* LoadData::LoadFile_RW(char *filename)
 	return toLoad_RW;
 }
 
-SDL_Surface* LoadImages(SDL_RWops*src)
+SDL_Texture* LoadData::LoadImages(char *filename)
 {
-	SDL_Surface* toLoadSurface = IMG_Load_RW(src, 1);
-	if (toLoadSurface == NULL)
+	SDL_RWops* RW_src = NULL;
+	SDL_Texture* ret = NULL;
+
+	RW_src = LoadFile_RW(filename);
+
+	if (RW_src != NULL)
 	{
-		LOG("Failed to load IMG from RW! ERROR: %s", IMG_GetError());
+		SDL_Surface* toLoadSurface = IMG_Load_RW(RW_src, 1);
+		if (toLoadSurface == NULL)
+		{
+			LOG("Failed to load IMG from RW! ERROR: %s", IMG_GetError());
+		}
+		else
+		{
+			ret = SDL_CreateTextureFromSurface(App->render->renderer, toLoadSurface);
+			SDL_FreeSurface(toLoadSurface);
+			if (ret == NULL)
+			{
+				LOG("Failed to load IMG from RW! ERROR: %s", IMG_GetError());
+			}
+			else
+			{
+				App->tex->textures.add(ret);
+			}
+		}
 	}
-	//ret = SDL_CreateTextureFromSurface(App->render->renderer, loadSurface);
-	
-	return toLoadSurface;
+	return ret;
 }
-Mix_Chunk* LoadAudio(SDL_RWops * src)
+Mix_Chunk* LoadData::LoadAudio(char *filename)
 {
 	Mix_Chunk * ret = NULL;
-	ret = Mix_LoadWAV_RW(src, 1);
+	SDL_RWops* RW_src = NULL;
 
-	if (!ret) 
+	RW_src = LoadFile_RW(filename);
+
+	if (RW_src != NULL)
 	{
-		printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
+		ret = Mix_LoadWAV_RW(RW_src, 1);
+
+		if (!ret)
+		{
+			printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
+		}
 	}
 	return ret;
 }

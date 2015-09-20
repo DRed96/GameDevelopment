@@ -7,7 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Scene.h"
-
+#include "LoadData.h"
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -29,6 +29,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	img = App->load_data->LoadImages(App->load_data->LoadFile_RW("game_test / textures / test.png"));
 	img = App->tex->Load("game_test/textures/test.png");
 	App->audio->PlayMusic("game_test/audio/music/music_sadpiano.ogg");
 	return true;

@@ -11,6 +11,8 @@ public:
 	LoadData();
 	~LoadData();
 
+	bool Start();
+
 	SDL_RWops* LoadFile_RW(char * filename);
 	SDL_Texture* LoadImages(char *filename);
 	Mix_Chunk* LoadAudio(char *filename);

@@ -10,6 +10,13 @@ LoadData::LoadData()
 LoadData::~LoadData()
 {}
 
+bool LoadData::Start()
+{
+	LOG("start textures");
+	bool ret = true;
+	return ret;
+}
+
 /*
 Crear modul i mètode loadfile amb SDL_RWops
 Audio i image
@@ -44,15 +51,13 @@ SDL_Texture* LoadData::LoadImages(char *filename)
 		}
 		else
 		{
-			ret = SDL_CreateTextureFromSurface(App->render->renderer, toLoadSurface);
+			//ret = SDL_CreateTextureFromSurface(App->render->renderer, toLoadSurface);
+			//App->tex->textures.add(ret);
+			ret = App->tex->LoadSurface(toLoadSurface);
 			SDL_FreeSurface(toLoadSurface);
 			if (ret == NULL)
 			{
 				LOG("Failed to load IMG from RW! ERROR: %s", IMG_GetError());
-			}
-			else
-			{
-				App->tex->textures.add(ret);
 			}
 		}
 	}
@@ -71,7 +76,7 @@ Mix_Chunk* LoadData::LoadAudio(char *filename)
 
 		if (!ret)
 		{
-			printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
+			LOG("Mix_LoadWAV_RW: %s\n", Mix_GetError());
 		}
 	}
 	return ret;

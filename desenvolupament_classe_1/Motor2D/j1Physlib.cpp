@@ -21,7 +21,7 @@ bool j1Physlib::Awake()
 bool j1Physlib::CleanUp()
 {
 	bool status = true;
-	if (PHYSFS_deinit() != 0)
+	if (PHYSFS_deinit() == 0)
 	{
 		status = false;
 		LOG("Failed to cleanup. ERROR:%s\n", PHYSFS_getLastError());

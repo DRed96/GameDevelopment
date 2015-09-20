@@ -8,6 +8,7 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 #include "j1Physlib.h"
+#include "LoadData.h"
 
 #include "j1App.h"
 
@@ -23,11 +24,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new j1Audio();
 	scene = new j1Scene();
 	phys_lib = new j1Physlib();
+	load_data = new LoadData();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
+	AddModule(load_data);
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(scene);

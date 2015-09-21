@@ -81,3 +81,32 @@ Mix_Chunk* LoadData::LoadAudio(char *filename)
 	}
 	return ret;
 }
+
+void loadFile_PHYSFS(char *filename)
+{
+
+	PHYSFS_File * file = NULL;
+	PHYSFS_sint64 len = 0;
+	
+
+	file = PHYSFS_openRead(filename);
+	if (file == NULL)
+	{
+		LOG("Failed to create PHYSLIB file. ERROR: %s", PHYSFS_getLastError);
+	}
+	else
+	{
+		len = PHYSFS_fileLength(file);
+		if (len == -1)
+		{
+			LOG("Failed to determine lenght of file. ERROR: %s", PHYSFS_getLastError);
+		}
+		else
+		{
+			SDL_RWops *RW_buffer = new SDL_RWops[len];
+#define N_OBJECTS 9999
+			PHYSFS_read(file, RW_buffer, len, N_OBJECTS);
+		}
+
+	}
+}

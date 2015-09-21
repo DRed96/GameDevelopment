@@ -105,7 +105,7 @@ void loadFile_PHYSFS(char *filename)
 		{
 			SDL_RWops *RW_buffer = new SDL_RWops[len];
 #define N_OBJECTS 9999
-			PHYSFS_read(file, RW_buffer, len, N_OBJECTS);
+			PHYSFS_read(file, RW_buffer, len, 1);
 		}
 
 	}

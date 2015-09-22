@@ -8,7 +8,7 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 #include "j1Physlib.h"
-#include "LoadData.h"
+#include "FileSystem.h"
 
 #include "j1App.h"
 
@@ -30,11 +30,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
+	AddModule(phys_lib);
 	AddModule(load_data);
 	AddModule(tex);
-	AddModule(audio);
+	//AddModule(audio);
 	AddModule(scene);
-	AddModule(phys_lib);
 	// render last to swap buffer
 	AddModule(render);
 }

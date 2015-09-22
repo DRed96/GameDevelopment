@@ -1,5 +1,29 @@
 <!-- Config file for the game -->
 
 <config>
-	<name>My super awesome game with XML</name>
+	<audio>
+	
+	</audio>
+  <file_system>
+    
+  </file_system>
+  <input>
+    
+  </input>
+  <render>
+    
+  </render>
+  <textures>
+    
+  </textures>
+  <window>
+   <name>"My super awesome game with XML _NEW_" </name>
+   <fullscreen>false</fullscreen>
+    <borderless>false</borderless>
+    <resizable>fasle</resizable>
+    <fullscreen_windowed>false</fullscreen_windowed>
+    <screen_width>640</screen_width>
+    <screen_height>480</screen_height>
+    <scale>1</scale>
+  </window>
 </config>

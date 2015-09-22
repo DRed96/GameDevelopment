@@ -19,10 +19,11 @@ j1Window::~j1Window()
 }
 
 // Called before render is available
-bool j1Window::Awake()
+bool j1Window::Awake(pugi::xml_node config)
 {
 	LOG("Init SDL window & surface");
 	bool ret = true;
+
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -68,7 +69,7 @@ bool j1Window::Awake()
 		{
 			//Get window surface
 			screen_surface = SDL_GetWindowSurface(window);
-			SetTitle(App->config.child("name").child_value());
+			SetTitle(config.child("window").child("name").child_value());
 		}
 	}
 

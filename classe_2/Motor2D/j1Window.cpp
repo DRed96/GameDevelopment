@@ -36,7 +36,7 @@ bool j1Window::Awake(pugi::xml_node config)
 		Uint32 flags = SDL_WINDOW_SHOWN;
 		width = SCREEN_WIDTH;
 		height = SCREEN_HEIGHT;
-		scale = SCALE;
+		scale = config.child("window").child("scale").value;
 
 		if(config.child("window").child("fullscreen").value == true)
 		{
@@ -58,7 +58,7 @@ bool j1Window::Awake(pugi::xml_node config)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, config.child("window").child("screen_width").value, height, flags);
+		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, config.child("window").child("screen_width").value, config.child("window").child("screen_height").value, flags);
 
 		if(window == NULL)
 		{

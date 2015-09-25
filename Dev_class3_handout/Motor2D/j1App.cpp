@@ -67,7 +67,6 @@ void j1App::AddModule(j1Module* module)
 bool j1App::Awake()
 {
 	bool ret = LoadConfig();
-
 	// self-config
 	title.create(app_config.child("title").child_value());
 	organization.create(app_config.child("organization").child_value());
@@ -84,7 +83,7 @@ bool j1App::Awake()
 		}
 	}
 
-	return ret;
+	return ret == true;
 }
 
 // Called before the first frame
@@ -149,6 +148,27 @@ bool j1App::LoadConfig()
 	return ret;
 }
 
+bool j1App::loadData()
+{
+	bool ret = true;
+
+	char* buf;
+	int size = App->fs->Load("data_files.xml", &buf);
+	pugi::xml_parse_result result = save_file.load_buffer(buf, size);
+	RELEASE(buf);
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file data_files.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		save = config_file.child("config");
+		app_save = config.child("app");
+	}
+
+	return ret;
+}
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
@@ -159,9 +179,16 @@ void j1App::FinishUpdate()
 {
 	// TODO 1: This is a good place to call load / Save functions
 	if (want_to_save)
-		doSave("save_data.xml");
+	{
+		doSave("Game/save_data.xml");
+		want_to_save = false;
+	}
+
 	if (want_to_load)
-		doLoad("save_data.xml");
+	{
+		doLoad("Game/save_data.xml");
+		want_to_load = false;
+	}
 }
 
 // Call modules before each loop iteration
@@ -274,30 +301,25 @@ const char* j1App::GetOrganization() const
 
 void j1App::doSave(const char* filename)
 {
-	p2List_item<j1Module*>* item;
-	item = modules.start;
-	j1Module* pModule = NULL;
-
-	for (item = modules.start; item != NULL; item = item->next)
-	{
-		pModule = item->data;
-
-		if (pModule->active == false) {
-			continue;
-		}
-
-		item->data->saveNow();
-	}
+	want_to_save = true;
+	save_game.create(filename);
 }
 
 void j1App::doLoad(const char* filename)
 {
+	want_to_load = true;
+	load_game.create(filename);
+}
+
+bool j1App::SaveGameNow() const
+{
+	bool ret = loadData();
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 	j1Module* pModule = NULL;
 
-	for (item = modules.start; item != NULL; item = item->next)
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
 
@@ -305,8 +327,15 @@ void j1App::doLoad(const char* filename)
 			continue;
 		}
 
-		item->data->loadNow();
+		//MEH MEH MEH MEH MEH MEH MEH MEH
+		ret = item->data->saveNow(save.child("window"));
 	}
+
+	return ret;
+}
+bool j1App::LoadGameNow()
+{
+	return true;
 }
 // TODO 3: Create a simulation of the xml file to read 
 

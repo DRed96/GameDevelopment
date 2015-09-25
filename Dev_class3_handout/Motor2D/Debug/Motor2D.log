@@ -1,9 +1,28 @@
-﻿Compilación iniciada a las 25/09/2015 10:52:46.
-     1>Proyecto "D:\Users\davidrc17\Desktop\Dev_class3_handout\Motor2D\Motor2D.vcxproj" en el nodo 2 (Build destinos).
-     1>Link:
-         Motor2D.vcxproj -> D:\Users\davidrc17\Desktop\Dev_class3_handout\Debug\Motor 2D.exe
-     1>Compilación del proyecto terminada "D:\Users\davidrc17\Desktop\Dev_class3_handout\Motor2D\Motor2D.vcxproj" (Build destinos).
+﻿Compilación iniciada a las 25/09/2015 11:54:28.
+     1>Proyecto "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1App.cpp j1Audio.cpp j1FileSystem.cpp j1Input.cpp j1Main.cpp j1Render.cpp j1Scene.cpp j1Textures.cpp j1Window.cpp
+         j1App.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class3_handout\motor2d\j1app.cpp(316): error C2662: 'bool j1App::loadData(void)' : no se puede convertir el puntero 'this' de 'const j1App' a 'j1App &'
+                 Se pierden calificadores en la conversión
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class3_handout\motor2d\j1app.cpp(330): error C2660: 'j1Module::saveNow' : la función no acepta 0 argumentos
+         Generando código...
+         Compilando...
+         j1Audio.cpp
+         Generando código...
+         Compilando...
+         j1Main.cpp
+         Generando código...
+         Compilando...
+         j1Render.cpp
+         Generando código...
+     1>cl : Línea de comandos warning D9028: error de recompilación mínimo, revirtiendo a la compilación normal
+         Omitiendo... (no se detectaron cambios relevantes)
+         j1Window.cpp
+         j1Input.cpp
+         j1FileSystem.cpp
+     1>Compilación del proyecto terminada "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" (Build destinos) -- ERROR.
 
-Compilación correcta.
+ERROR al compilar.
 
-Tiempo transcurrido 00:00:00.03
+Tiempo transcurrido 00:00:04.68

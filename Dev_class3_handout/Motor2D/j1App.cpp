@@ -180,13 +180,13 @@ void j1App::FinishUpdate()
 	// TODO 1: This is a good place to call load / Save functions
 	if (want_to_save)
 	{
-		doSave("Game/save_data.xml");
+		SaveGameNow();
 		want_to_save = false;
 	}
 
 	if (want_to_load)
 	{
-		doLoad("Game/save_data.xml");
+		SaveGameNow();
 		want_to_load = false;
 	}
 }
@@ -311,7 +311,7 @@ void j1App::doLoad(const char* filename)
 	load_game.create(filename);
 }
 
-bool j1App::SaveGameNow() const
+bool j1App::SaveGameNow()
 {
 	bool ret = loadData();
 
@@ -326,16 +326,30 @@ bool j1App::SaveGameNow() const
 		if (pModule->active == false) {
 			continue;
 		}
-
-		//MEH MEH MEH MEH MEH MEH MEH MEH
-		ret = item->data->saveNow(save.child("window"));
+		ret = item->data->saveNow(save.child(item->data->name.GetString()));
 	}
 
 	return ret;
 }
 bool j1App::LoadGameNow()
 {
-	return true;
+	bool ret = loadData();
+
+	p2List_item<j1Module*>* item;
+	item = modules.start;
+	j1Module* pModule = NULL;
+
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		pModule = item->data;
+
+		if (pModule->active == false) {
+			continue;
+		}
+		ret = item->data->loadNow(save.child(item->data->name.GetString()));
+	}
+
+	return ret;
 }
 // TODO 3: Create a simulation of the xml file to read 
 

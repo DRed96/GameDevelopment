@@ -65,7 +65,7 @@ public:
 		return true;
 	}
 
-	virtual bool loadNow(pugi::xml_node& data_module)
+	virtual bool loadNow(pugi::xml_node& data)
 	{
 		return true;
 	}

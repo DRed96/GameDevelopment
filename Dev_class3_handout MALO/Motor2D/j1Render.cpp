@@ -88,11 +88,12 @@ bool j1Render::CleanUp()
 }
 
 // TODO 6: Create a method to load the state
-// for now it will be camera's x and y
+// for now it will be camera's x alnd y
 bool j1Render::loadNow(pugi::xml_node& data)
 {
-	camera.x = data.attribute("x").as_int();
-	camera.y = data.attribute("y").as_int();
+	//data = data.child("saved_data");
+	camera.x = data.child("camera_pos").attribute("x").as_int();
+	camera.y = data.child("camera_pos").attribute("y").as_int();
 	return true;
 }
 // TODO 8: Create a method to save the state

@@ -164,8 +164,8 @@ bool j1App::loadData()
 	}
 	else
 	{
-		save = config_file.child("config");
-		app_save = config.child("app");
+		save = save_file.child("saved_data");
+		//app_save =save.child("app");
 	}
 
 	return ret;
@@ -343,6 +343,17 @@ bool j1App::LoadGameNow()
 	title.create(app_save.child("title").child_value());
 	organization.create(app_save.child("organization").child_value());
 
+	const char* debug = item->data->name.GetString();
+	int i = 0;
+	while (i<=4)
+	{
+		debug = item->data->name.GetString();
+		item = item->next;
+		i++;
+	}
+
+	item->data->loadNow(save);
+		/*
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
@@ -356,6 +367,7 @@ bool j1App::LoadGameNow()
 		item = item->next;
 	}
 
+	*/
 	return ret;
 }
 // TODO 3: Create a simulation of the xml file to read 

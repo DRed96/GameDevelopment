@@ -156,6 +156,7 @@ unsigned int j1FileSystem::Save(const char* file, const char* buffer, unsigned i
 
 	if(fs_file != NULL)
 	{
+		PHYSFS_file* debug2 = PHYSFS_openWrite("data_files1.xml");
 		PHYSFS_sint64 written = PHYSFS_write(fs_file, (const void*)buffer, 1, size);
 		if(written != size)
 			LOG("File System error while writing to file %s: %s\n", file, PHYSFS_getLastError());

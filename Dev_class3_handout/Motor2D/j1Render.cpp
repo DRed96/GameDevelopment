@@ -99,7 +99,7 @@ bool j1Render::loadNow(pugi::xml_node& data)
 }
 // TODO 8: Create a method to save the state
 // using append_child and append_attribute
-bool j1Render::saveNow(pugi::xml_node& data) const
+bool j1Render::saveNow(pugi::xml_node& data)
 {
 	data = data.append_child("camera");
 	data.append_attribute("x").set_value(camera.x);

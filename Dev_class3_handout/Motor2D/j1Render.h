@@ -30,7 +30,7 @@ public:
 
 	// Load / Save
 	bool loadNow(pugi::xml_node&);
-	bool saveNow(pugi::xml_node&) const;
+	bool saveNow(pugi::xml_node&);
 
 	// Blit
 	void SetViewPort(const SDL_Rect& rect);

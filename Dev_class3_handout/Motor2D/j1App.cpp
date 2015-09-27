@@ -13,6 +13,7 @@
 #include "j1FileSystem.h"
 #include "j1App.h"
 
+#include "PhysFS/include/physfs.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -352,7 +353,7 @@ bool j1App::SaveGameNow()
 
 	bool ret = true;
 	std::stringstream data_stream;
-	char * buff;
+	char * buff = NULL;
 	
 	const char* debug = NULL;
 	save = save_file.append_child("game_state");
@@ -369,9 +370,9 @@ bool j1App::SaveGameNow()
 	unsigned int size = sizeof(save_file);
 	//When save_file is full of data, we pass it to a stringstream
 	save_file.save(data_stream);
-	App->fs->Save(data_stream.str.c_str(),buff, size);
+	App->fs->Save("data_files1.xml", data_stream.str().c_str(), size);
 
-
+	PHYSFS_file* debug2 = PHYSFS_openWrite("data_files1.xml");
 	if (!ret)
 		LOG("Error at function saveNow. File %s", debug);
 	return ret;

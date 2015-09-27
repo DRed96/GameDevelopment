@@ -324,17 +324,18 @@ bool j1App::LoadGameNow()
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 
+	const char* debug = NULL;
 //	item->data->loadNow(save);
 		
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		const char* debug = item->data->name.GetString();
+		debug = item->data->name.GetString();
 	
 		ret = item->data->loadNow(load);
 	}
 
 	if (!ret)
-		LOG("Error at function loadNow");
+		LOG("Error at function loadNow File %s", debug);
 
 	return ret;
 }
@@ -353,20 +354,25 @@ bool j1App::SaveGameNow()
 	std::stringstream data_stream;
 	char * buff;
 	
+	const char* debug = NULL;
 	save = save_file.append_child("game_state");
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 	while (item != NULL && ret == true)
 	{
-		const char* debug = item->data->name.GetString();
-		ret = item->data->saveNow(save);
+		debug = item->data->name.GetString();
+		ret = item->data->saveNow(save.append_child(item->data->name.GetString()));
 		item = item->next;
 	}
+	
 
 	unsigned int size = sizeof(save_file);
 	//When save_file is full of data, we pass it to a stringstream
 	save_file.save(data_stream);
 	App->fs->Save(data_stream.str.c_str(),buff, size);
 
+
+	if (!ret)
+		LOG("Error at function saveNow. File %s", debug);
 	return ret;
 }

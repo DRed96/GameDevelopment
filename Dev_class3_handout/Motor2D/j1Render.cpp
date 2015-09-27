@@ -90,7 +90,7 @@ bool j1Render::CleanUp()
 // TODO 6: Create a method to load the state
 bool j1Render::loadNow(pugi::xml_node& data)
 {
-	//Is this correct!!!?
+	//QUE Is this correct!!!?
 	data = data.child("camera_pos");
 	//----------
 	camera.x = data.attribute("x").as_int(/*def = */-1);
@@ -99,6 +99,17 @@ bool j1Render::loadNow(pugi::xml_node& data)
 }
 // TODO 8: Create a method to save the state
 // using append_child and append_attribute
+bool j1Render::saveNow(pugi::xml_node& data) const
+{
+	data = data.append_child("camera");
+	data.append_attribute("x").set_value(camera.x);
+	data.append_attribute("y").set_value(camera.y);
+
+	int checker_x = data.attribute("x").as_int();
+	int checker_y = data.attribute("y").as_int();
+
+	return checker_x == camera.x && checker_y == camera.y;
+}
 
 
 

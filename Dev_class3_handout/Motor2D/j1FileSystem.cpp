@@ -147,7 +147,7 @@ int close_sdl_rwops(SDL_RWops *rw)
 }
 
 // Save a whole buffer to disk
-//TODO: Optimize size!!!!!!!!!!!!!!!!!!!!!!!
+//QUE: Optimize size!!!!!!!!!!!!!!!!!!!!!!!
 unsigned int j1FileSystem::Save(const char* file, const char* buffer, unsigned int size) const
 {
 	unsigned int ret = 0;

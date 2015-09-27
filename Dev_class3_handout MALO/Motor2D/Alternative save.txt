@@ -1,0 +1,21 @@
+bool j1Render::saveNow(pugi::xml_node& data)
+{
+	data.child("camera_pos").attribute("x").set_value(camera.x);
+	data.child("camera_pos").attribute("y").set_value(camera.y);
+	return true;
+}
+
+//SaveGameNow
+bool ret = loadData();
+
+	p2List_item<j1Module*>* item;
+	item = modules.start;
+
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		//save.child(item->data->name.GetString())
+		ret = item->data->saveNow(save);
+	}
+	
+	save_file.save_file("data_files.xml");
+	return ret;

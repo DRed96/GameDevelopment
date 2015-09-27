@@ -155,7 +155,7 @@ bool j1App::loadData()
 
 	char* buf;
 	int size = App->fs->Load("data_files.xml", &buf);
-	pugi::xml_parse_result result = save_file.load_buffer(buf, size);
+	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
 	RELEASE(buf);
 	if (result == NULL)
 	{
@@ -164,7 +164,7 @@ bool j1App::loadData()
 	}
 	else
 	{
-		save = save_file.child("saved_data");
+		load = load_file.child("saved_data");
 		//app_save =save.child("app");
 	}
 
@@ -313,22 +313,10 @@ void j1App::doLoad(const char* filename)
 	load_game.create(filename);
 }
 
-bool j1App::SaveGameNow()
-{
-	bool ret = loadData();
+// TODO 3: Create a simulation of the xml file to read 
 
-	p2List_item<j1Module*>* item;
-	item = modules.start;
-
-	for (item = modules.start; item != NULL && ret == true; item = item->next)
-	{
-		//save.child(item->data->name.GetString())
-		ret = item->data->saveNow(save);
-	}
-	
-	save_file.save_file("data_files.xml");
-	return ret;
-}
+// TODO 4: Create a method to actually load an xml file
+// then call all the modules to load themselves
 bool j1App::LoadGameNow()
 {
 	bool ret = loadData();
@@ -342,7 +330,7 @@ bool j1App::LoadGameNow()
 	{
 		const char* debug = item->data->name.GetString();
 	
-		ret = item->data->loadNow(save);
+		ret = item->data->loadNow(load);
 	}
 
 	if (!ret)
@@ -350,10 +338,7 @@ bool j1App::LoadGameNow()
 
 	return ret;
 }
-// TODO 3: Create a simulation of the xml file to read 
 
-// TODO 4: Create a method to actually load an xml file
-// then call all the modules to load themselves
 
 // TODO 7: Create a method to save the current state
 // First fill a pugui::xml_document
@@ -361,3 +346,27 @@ bool j1App::LoadGameNow()
 // std::stringstream stream;
 // my_xml_document.save(stream);
 // then access it via stream.str().c_str()
+bool j1App::SaveGameNow()
+{
+
+	bool ret = true;
+	std::stringstream data_stream;
+	char * buff;
+	
+	save = save_file.append_child("game_state");
+	p2List_item<j1Module*>* item;
+	item = modules.start;
+	while (item != NULL && ret == true)
+	{
+		const char* debug = item->data->name.GetString();
+		ret = item->data->saveNow(save);
+		item = item->next;
+	}
+
+	unsigned int size = sizeof(save_file);
+	//When save_file is full of data, we pass it to a stringstream
+	save_file.save(data_stream);
+	App->fs->Save(data_stream.str.c_str(),buff, size);
+
+	return ret;
+}

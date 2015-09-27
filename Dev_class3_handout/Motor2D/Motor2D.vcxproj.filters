@@ -111,4 +111,7 @@
   <ItemGroup>
     <Text Include="Alternative save.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Game\data_files.xml" />
+  </ItemGroup>
 </Project>

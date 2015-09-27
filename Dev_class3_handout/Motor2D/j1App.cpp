@@ -356,7 +356,7 @@ bool j1App::SaveGameNow()
 	char * buff = NULL;
 	
 	const char* debug = NULL;
-	save = save_file.append_child("game_state");
+	save = save_file.append_child("game_states");
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 	while (item != NULL && ret == true)
@@ -366,13 +366,14 @@ bool j1App::SaveGameNow()
 		item = item->next;
 	}
 	
+//	PHYSFS_permitSymbolicLinks(1);
 
 	unsigned int size = sizeof(save_file);
 	//When save_file is full of data, we pass it to a stringstream
 	save_file.save(data_stream);
-	App->fs->Save("data_files1.xml", data_stream.str().c_str(), size);
+	App->fs->Save("data_files.xml", data_stream.str().c_str(), size);
 
-	PHYSFS_file* debug2 = PHYSFS_openWrite("data_files1.xml");
+	PHYSFS_file* debug2 = PHYSFS_openRead("data_files.xml");
 	if (!ret)
 		LOG("Error at function saveNow. File %s", debug);
 	return ret;

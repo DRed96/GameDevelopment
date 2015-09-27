@@ -101,7 +101,6 @@ private:
 
 	pugi::xml_document	save_file;
 	pugi::xml_node		save;
-	pugi::xml_node		app_save;
 
 	int					argc;
 	char**				args;

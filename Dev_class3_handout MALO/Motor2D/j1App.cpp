@@ -183,6 +183,7 @@ void j1App::FinishUpdate()
 	{
 		SaveGameNow();
 		want_to_save = false;
+		
 	}
 
 	if (want_to_load)
@@ -318,18 +319,14 @@ bool j1App::SaveGameNow()
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
-	j1Module* pModule = NULL;
 
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		pModule = item->data;
-
-		if (pModule->active == false) {
-			continue;
-		}
-		ret = item->data->saveNow(save.child(item->data->name.GetString()));
+		//save.child(item->data->name.GetString())
+		ret = item->data->saveNow(save);
 	}
-
+	
+	save_file.save_file("data_files.xml");
 	return ret;
 }
 bool j1App::LoadGameNow()
@@ -338,36 +335,19 @@ bool j1App::LoadGameNow()
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
-	j1Module* pModule = NULL;
 
-	title.create(app_save.child("title").child_value());
-	organization.create(app_save.child("organization").child_value());
-
-	const char* debug = item->data->name.GetString();
-	int i = 0;
-	while (i<=4)
-	{
-		debug = item->data->name.GetString();
-		item = item->next;
-		i++;
-	}
-
-	item->data->loadNow(save);
-		/*
+//	item->data->loadNow(save);
+		
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		pModule = item->data;
-
-		if (pModule->active == false) {
-			continue;
-		}
-
 		const char* debug = item->data->name.GetString();
+	
 		ret = item->data->loadNow(save);
-		item = item->next;
 	}
 
-	*/
+	if (!ret)
+		LOG("Error at function loadNow");
+
 	return ret;
 }
 // TODO 3: Create a simulation of the xml file to read 

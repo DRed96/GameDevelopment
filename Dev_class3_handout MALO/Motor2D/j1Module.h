@@ -31,7 +31,7 @@ public:
 
 	//--------------- TMP
 	// TODO 2: Create new virtual methods to Load and Save
-	virtual bool saveNow(pugi::xml_node& data) const
+	virtual bool saveNow(pugi::xml_node& data)
 	{
 		return true;
 	}

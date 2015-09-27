@@ -61,6 +61,9 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT)
 		App->doLoad("data_files.xml");
 
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		App->doSave("data_files.xml");
+
 	App->render->Blit(img, 0, 0);
 	return true;
 }

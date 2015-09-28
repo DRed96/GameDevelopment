@@ -27,8 +27,8 @@ enum mapOrientation
 {
 	Orthogonal,
 	Isometric,
-	Isometric_straggered,
-	Hexagonal_straggered
+	Straggered 
+	
 };
 
 enum renderOrder
@@ -47,10 +47,10 @@ struct map_variables
 	renderOrder render_order;
 	int width;
 	int height ;
-	int tilewidth ;
-	int tileheight;
-	int nextobjectid;
-	float backgroundcolor;
+	int tileWidth ;
+	int tileHeight;
+	int nextObjectId;
+	float backgroundColor;
 	p2List<tileSet_variables> tileVars;
 };
 // ----------------------------------------------------
@@ -76,11 +76,36 @@ public:
 	bool Load(const char* path);
 
 private:
+	map_variables loadMapHeader()
+	{
+		mapVars->map_version = map_file.child("map").attribute("version").as_float();
+		
+		mapVars->width = map_file.child("map").attribute("width").as_int();
+		mapVars->height = map_file.child("map").attribute("height").as_int();
+		mapVars->tileWidth = map_file.child("map").attribute("tilewidth").as_int();
+		mapVars->tileHeight = map_file.child("map").attribute("tileheight").as_int();
+		mapVars->nextObjectId = map_file.child("map").attribute("nextobjectid").as_int();
 
+		if (map_file.child("map").attribute("orientation").value() == "orthogonal")
+			mapVars->orientation = Orthogonal;
+		else if (map_file.child("map").attribute("orientation").value() == "isometric")
+			mapVars->orientation = Isometric;
+		else if (map_file.child("map").attribute("orientation").value() == "straggered")
+			mapVars->orientation = Straggered;
+
+		if (map_file.child("map").attribute("renderorder").value() == "right-down")
+			mapVars->render_order = Right_down;
+		else if (map_file.child("map").attribute("renderorder").value() == "right-up")
+			mapVars->render_order = Right_up;
+		else if (map_file.child("map").attribute("renderorder").value() == "left-down")
+			mapVars->render_order = Left_down;
+		else if (map_file.child("map").attribute("renderorder").value() == "left-up")
+			mapVars->render_order = Left_up;
+	}
 public:
 
 	// TODO 1: Add your struct for map info as public for now
-	map_variables mapVars;
+	map_variables* mapVars;
 private:
 
 	pugi::xml_document	map_file;

@@ -44,7 +44,7 @@ bool j1Map::CleanUp()
 
 	// TODO 2: Make sure you clean up any memory allocated
 	// from tilesets / map
-
+	mapVars.tileVars.~p2List();
 	// Remove all tilesets
 
 
@@ -75,6 +75,8 @@ bool j1Map::Load(const char* file_name)
 	{
 		// TODO 3: Create and call a private function to load and fill
 		// all your map data
+
+		//App->fs->Load("test.xml");
 	}
 
 	// TODO 4: Create and call a private function to load a tileset

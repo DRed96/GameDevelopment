@@ -118,8 +118,8 @@ bool j1Map::Load(const char* file_name)
 		const unsigned int limit = mapVars.tileVars.count() - 1;
 		for (int i = 0; i <= limit; i++)
 		{
-			LOG("Tile Data-----\n FirstGid: %i, name: %s, Tile Width: %i, Tile Height: %i, \n Spacing: %i, Margin: %i, TileCount: %i, Source:%s \n", mapVars.tileVars[i].firstgid, mapVars.tileVars[i].name, mapVars.tileVars[i].tilewidth, mapVars.tileVars[i].tileheight, 
-				mapVars.tileVars[i].spacing, mapVars.tileVars[i].margin, mapVars.tileVars[i].tileCount, mapVars.tileVars[i].source);
+			LOG("Tile Data-----\n FirstGid: %i, Tile Width: %i, Tile Height: %i, \n Spacing: %i, Margin: %i, TileCount: %i,\n", mapVars.tileVars[i].firstgid,/* mapVars.tileVars[i].name,*/ mapVars.tileVars[i].tilewidth, mapVars.tileVars[i].tileheight, 
+				mapVars.tileVars[i].spacing, mapVars.tileVars[i].margin, mapVars.tileVars[i].tileCount/*, mapVars.tileVars[i].source*/); /*, name: %s  Source:%s */
 		}
 	
 	map_loaded = ret;

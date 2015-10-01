@@ -19,7 +19,7 @@ j1Map::~j1Map()
 // Called before render is available
 bool j1Map::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Map Parser");
+	LOG("Loading Map Parser\n");
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
@@ -40,13 +40,17 @@ void j1Map::Draw()
 // Called before quitting
 bool j1Map::CleanUp()
 {
-	LOG("Unloading map");
+	LOG("Unloading map\n");
 
 	// TODO 2: Make sure you clean up any memory allocated
 	// from tilesets / map
 
-	mapVars->tileVars.~p2List();
-	delete(mapVars);
+	mapVars.tileVars.~p2List();
+
+	//Free the map_vars memory
+
+	//delete(&mapVars);
+
 	// Remove all tilesets
 
 
@@ -79,16 +83,45 @@ bool j1Map::Load(const char* file_name)
 		// all your map data
 		//Fill the map struct with data(without filling the tileset)
 		loadMapHeader();
+		loadTilesetHeader();
 		
 	}
 
 	// TODO 4: Create and call a private function to load a tileset
 	// remember to support more any number of tilesets!
 	
-
 	// TODO 5: LOG all the data loaded
 	// iterate all tilesets and LOG everything
+	
+	
+		char* orient = NULL;
+		char * renderO = NULL;
+		if (mapVars.orientation == 0)
+			orient = "orthogonal";
+		else if (mapVars.orientation == 1)
+			orient = "isometric";
+		else if (mapVars.orientation == 2)
+			orient = "straggered";
+		
+		
+		if (mapVars.render_order == 0)
+			renderO = "right-down";
+		else if (mapVars.render_order == 1)
+			renderO = "right-up";
+		else if (mapVars.render_order == 2)
+			renderO = "left-down";
+		else if (mapVars.render_order == 3)
+			renderO = "left-up";
 
+		LOG("Map Data-----\n Width: %i, Height: %i, Tile width: %i, Tile Height: %i \n, Orientation: %s, Render Order:  %s,, nextObjectId: \n", mapVars.width, mapVars.height, mapVars.tileWidth, mapVars.tileHeight, orient, renderO, mapVars.nextObjectId);
+		LOG("Background Color: %f\n", mapVars.backgroundColor);
+		const unsigned int limit = mapVars.tileVars.count() - 1;
+		for (int i = 0; i <= limit; i++)
+		{
+			LOG("Tile Data-----\n FirstGid: %i, name: %s, Tile Width: %i, Tile Height: %i, \n Spacing: %i, Margin: %i, TileCount: %i, Source:%s \n", mapVars.tileVars[i].firstgid, mapVars.tileVars[i].name, mapVars.tileVars[i].tilewidth, mapVars.tileVars[i].tileheight, 
+				mapVars.tileVars[i].spacing, mapVars.tileVars[i].margin, mapVars.tileVars[i].tileCount, mapVars.tileVars[i].source);
+		}
+	
 	map_loaded = ret;
 
 	return ret;

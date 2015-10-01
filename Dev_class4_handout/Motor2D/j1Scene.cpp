@@ -88,7 +88,7 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	LOG("Freeing scene");
+	LOG("Freeing scene\n");
 
 	return true;
 }

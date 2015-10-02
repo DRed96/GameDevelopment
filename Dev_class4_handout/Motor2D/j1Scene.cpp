@@ -21,8 +21,14 @@ j1Scene::~j1Scene()
 // Called before render is available
 bool j1Scene::Awake(pugi::xml_node& node)
 {
-	title = node.child("scene").attribute("map_name").as_string();
+	title = node.attribute("map_name").as_string("Title ERROR");
 	LOG("Loading Scene");
+
+	if (node == NULL)
+		LOG("Node Error");
+	if (title == "Title ERROR")
+		LOG("%s", title);
+
 	bool ret = true;
 
 	return ret;

@@ -62,10 +62,11 @@ bool j1Map::CleanUp()
 // Load new map
 bool j1Map::Load(const char* file_name)
 {
+	//PROBLEM WITH FILENAME!
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
-	char* buf;
+	char* buf = NULL;
 	int size = App->fs->Load(tmp.GetString(), &buf);
 	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
 
@@ -113,13 +114,14 @@ bool j1Map::Load(const char* file_name)
 		else if (mapVars.render_order == 3)
 			renderO = "left-up";
 
-		LOG("Map Data-----\n Width: %i, Height: %i, Tile width: %i, Tile Height: %i \n, Orientation: %s, Render Order:  %s,, nextObjectId: \n", mapVars.width, mapVars.height, mapVars.tileWidth, mapVars.tileHeight, orient, renderO, mapVars.nextObjectId);
+		LOG("Map Data-----\n Width:%i, Height:%i, Tile width:%i, Tile Height:%i,\nOrientation:%s, Render Order:%s, nextObjectId:%i\n", mapVars.width, mapVars.height, mapVars.tileWidth, mapVars.tileHeight, orient, renderO, mapVars.nextObjectId);
 		LOG("Background Color: %f\n", mapVars.backgroundColor);
 		const unsigned int limit = mapVars.tileVars.count() - 1;
-		for (int i = 0; i <= limit; i++)
+		for (unsigned int i = 0; i <= limit; i++)
 		{
-			LOG("Tile Data-----\n FirstGid: %i, Tile Width: %i, Tile Height: %i, \n Spacing: %i, Margin: %i, TileCount: %i,\n", mapVars.tileVars[i].firstgid,/* mapVars.tileVars[i].name,*/ mapVars.tileVars[i].tilewidth, mapVars.tileVars[i].tileheight, 
-				mapVars.tileVars[i].spacing, mapVars.tileVars[i].margin, mapVars.tileVars[i].tileCount/*, mapVars.tileVars[i].source*/); /*, name: %s  Source:%s */
+			//p2mapVars.tileVars.At(0)
+			LOG("Tile Data-----\n FirstGid: %i, name: %s, Source:%s, Tile Width: %i, Tile Height: %i, \n Spacing: %i,  Margin: %i, TileCount: %i,\n", mapVars.tileVars[i].firstgid, mapVars.tileVars[i].name, mapVars.tileVars[i].tilewidth, mapVars.tileVars[i].tileheight, 
+				mapVars.tileVars[i].spacing, mapVars.tileVars[i].margin, mapVars.tileVars[i].tileCount, mapVars.tileVars[i].source); 
 		}
 	
 	map_loaded = ret;

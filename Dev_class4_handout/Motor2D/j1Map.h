@@ -11,8 +11,8 @@
 struct tileSet_variables
 {
 	int firstgid;
-	const pugi::char_t * source;
-	const pugi::char_t * name;
+	const char * source;
+	const  char * name;
 	int tilewidth;
 	int tileheight;
 	int spacing;
@@ -113,11 +113,9 @@ private:
 			tilesToFill.tileheight = tileset.attribute("tileheight").as_int();
 			tilesToFill.spacing = tileset.attribute("spacing").as_int();
 			tilesToFill.margin= tileset.attribute("margin").as_int();
-			//tilesToFill.source = tileset.attribute("source").as_string();
+			tilesToFill.source = tileset.attribute("source").as_string();
 			tilesToFill.tileCount = tileset.attribute("tileCount").as_int();
 			mapVars.tileVars.add(tilesToFill);
-
-			
 		}
 		tileSet_variables debug = mapVars.tileVars.At(0)->data;
 	}

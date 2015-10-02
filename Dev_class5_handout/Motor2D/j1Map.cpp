@@ -111,7 +111,7 @@ bool j1Map::Load(const char* file_name)
 	tmp_item = data.layers.start;
 	pugi::xml_node layer;
 
-	for (layer = map_file.child("map").child("layer"); tileset && ret; tileset = tileset.next_sibling("layer"))
+	for (layer = map_file.child("map").child("layer"); layer && ret; layer = layer.next_sibling("layer"))
 	{
 		Layer* lays = new Layer();
 		if (ret == true)
@@ -247,7 +247,7 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 	return ret;
 }
 
-bool LoadLayer(pugi::xml_node& node, Layer* layer)
+bool j1Map::LoadLayer(pugi::xml_node& node, Layer* layer)
 {
 	bool ret = true;
 	layer->name = node.attribute("name").as_string();

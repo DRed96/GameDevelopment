@@ -8,14 +8,14 @@ struct SDL_Texture;
 class j1Scene : public j1Module
 {
 public:
-
+	const char * title;
 	j1Scene();
 
 	// Destructor
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node& node);
 
 	// Called before the first frame
 	bool Start();

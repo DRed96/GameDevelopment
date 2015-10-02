@@ -19,8 +19,9 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& node)
 {
+	title = node.child("scene").attribute("map_name").as_string();
 	LOG("Loading Scene");
 	bool ret = true;
 
@@ -30,7 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("hello2.tmx");
+	App->map->Load(title);
 	return true;
 }
 

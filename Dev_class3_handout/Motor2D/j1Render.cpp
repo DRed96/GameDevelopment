@@ -90,8 +90,7 @@ bool j1Render::CleanUp()
 // TODO 6: Create a method to load the state
 bool j1Render::loadNow(pugi::xml_node& data)
 {
-	//QUE Is this correct!!!?
-	data = data.child("camera_pos");
+	data = data.child("renderer").child("camera_pos");
 	//----------
 	camera.x = data.attribute("x").as_int(/*def = */-1);
 	camera.y = data.attribute("y").as_int(/*def = */-1);

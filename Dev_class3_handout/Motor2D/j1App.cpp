@@ -154,13 +154,13 @@ bool j1App::loadData()
 {
 	bool ret = true;
 
-	char* buf;
-	int size = App->fs->Load("data_files.xml", &buf);
+	char* buf = NULL;
+	int size = App->fs->Load("game_files.xml", &buf);
 	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
 	RELEASE(buf);
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file data_files.xml. pugi error: %s", result.description());
+		LOG("Could not load map xml file data_files.xml pugi error: %s", result.description());
 		ret = false;
 	}
 	else
@@ -169,6 +169,14 @@ bool j1App::loadData()
 		//app_save =save.child("app");
 	}
 
+	return ret;
+}
+
+bool j1App::loadSave()
+{
+	bool ret = true;
+	/*char* buf;
+	int size = App->fs->Load("game_files.xml", &buf);*/
 	return ret;
 }
 // ---------------------------------------------
@@ -183,8 +191,7 @@ void j1App::FinishUpdate()
 	if (want_to_save)
 	{
 		SaveGameNow();
-		want_to_save = false;
-		
+		want_to_save = false;	
 	}
 
 	if (want_to_load)
@@ -326,7 +333,7 @@ bool j1App::LoadGameNow()
 	item = modules.start;
 
 	const char* debug = NULL;
-//	item->data->loadNow(save);
+	item->data->loadNow(load);//save
 		
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -350,31 +357,53 @@ bool j1App::LoadGameNow()
 // then access it via stream.str().c_str()
 bool j1App::SaveGameNow()
 {
-
 	bool ret = true;
-	std::stringstream data_stream;
-	char * buff = NULL;
-	
-	const char* debug = NULL;
-	save = save_file.append_child("game_states");
 	p2List_item<j1Module*>* item;
-	item = modules.start;
-	while (item != NULL && ret == true)
+	//where the data goes
+	std::stringstream stream;
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		debug = item->data->name.GetString();
-		ret = item->data->saveNow(save.append_child(item->data->name.GetString()));
-		item = item->next;
+		ret = item->data->saveNow(save_file.append_child(item->data->name.GetString()));
 	}
-	
+	const char * dir = App->fs->GetSaveDirectory();
+	if (PHYSFS_setWriteDir("\save")!= 0)
+		LOG("ERROR at setting writing directory: %s", PHYSFS_getLastError());
+	else
+		LOG("Writing directory : %s", PHYSFS_getWriteDir());
+
+
+	save_file.save(stream);
+	LOG("%s", stream.str().c_str());
+	App->fs->Save("game_state.xml", stream.str().c_str(), sizeof(stream));
+	return true;
+}
+
+
+
+/*
+bool ret = true;
+std::stringstream data_stream;
+char * buff = NULL;
+
+const char* debug = NULL;
+save = save_file.append_child("game_states");
+p2List_item<j1Module*>* item;
+item = modules.start;
+while (item != NULL && ret == true)
+{
+debug = item->data->name.GetString();
+ret = item->data->saveNow(save.append_child(item->data->name.GetString()));
+item = item->next;
+}
+
 //	PHYSFS_permitSymbolicLinks(1);
 
-	unsigned int size = sizeof(save_file);
-	//When save_file is full of data, we pass it to a stringstream
-	save_file.save(data_stream);
-	App->fs->Save("data_files.xml", data_stream.str().c_str(), size);
+unsigned int size = sizeof(save_file);
+//When save_file is full of data, we pass it to a stringstream
+save_file.save(data_stream);
+App->fs->Save("data_files.xml", data_stream.str().c_str(), size);
 
-	PHYSFS_file* debug2 = PHYSFS_openRead("data_files.xml");
-	if (!ret)
-		LOG("Error at function saveNow. File %s", debug);
-	return ret;
-}
+PHYSFS_file* debug2 = PHYSFS_openRead("data_files.xml");
+if (!ret)
+LOG("Error at function saveNow. File %s", debug);
+return ret;*/

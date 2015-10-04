@@ -15,7 +15,8 @@ j1FileSystem::j1FileSystem() : j1Module()
 	char* base_path = SDL_GetBasePath();
 	PHYSFS_init(base_path);
 	SDL_free(base_path);
-
+	//Let's see if it sorta works out
+	PHYSFS_permitSymbolicLinks(1);
 	// By default we include executable's own directory
 	// without this we won't be able to find config.xml :-(
 	AddPath(".");
@@ -59,7 +60,8 @@ bool j1FileSystem::Awake(pugi::xml_node& config)
 // Called before quitting
 bool j1FileSystem::CleanUp()
 {
-	//LOG("Freeing File System subsystem");
+	//PHYSFS_freeList();
+	LOG("Freeing File System subsystem");
 	return true;
 }
 

@@ -57,9 +57,10 @@ private:
 	// Load config file
 	bool LoadConfig();
 
-	//Load save file
+	//Load "load" file
 	bool loadData();
-
+	//Load save file
+	bool loadSave();
 	// Call modules before each loop iteration
 	void PrepareUpdate();
 

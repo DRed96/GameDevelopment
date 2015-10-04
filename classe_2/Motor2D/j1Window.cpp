@@ -36,29 +36,30 @@ bool j1Window::Awake(pugi::xml_node config)
 		Uint32 flags = SDL_WINDOW_SHOWN;
 		width = SCREEN_WIDTH;
 		height = SCREEN_HEIGHT;
-		scale = config.child("window").child("scale").value;
+		scale = SCALE;
 
-		if(config.child("window").child("fullscreen").value == true)
+
+		if(R_FULLSCREEN == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		if (config.child("window").child("borderless").value == true)
+		if (R_BORDERLESS == true)
 		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if (config.child("window").child("resizable").value == true)
+		if (R_RESIZABLE == true)
 		{
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if (config.child("window").child("fullscreen_windowed").value == true)
+		if (R_FULLSCR_WINDOWED == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, config.child("window").child("screen_width").value, config.child("window").child("screen_height").value, flags);
+		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,SCREEN_WIDTH, SCREEN_HEIGHT, flags);
 
 		if(window == NULL)
 		{

@@ -20,8 +20,9 @@
    <name>"My super awesome game with XML _NEW_" </name>
    <fullscreen>false</fullscreen>
     <borderless>false</borderless>
-    <resizable>fasle</resizable>
+    <resizable>false</resizable>
     <fullscreen_windowed>false</fullscreen_windowed>
+    <size screen_width = 640></size>
     <screen_width>640</screen_width>
     <screen_height>480</screen_height>
     <scale>1</scale>

@@ -366,15 +366,16 @@ bool j1App::SaveGameNow()
 		ret = item->data->saveNow(save_file.append_child(item->data->name.GetString()));
 	}
 	const char * dir = App->fs->GetSaveDirectory();
-	if (PHYSFS_setWriteDir("\save")!= 0)
+	/*if (PHYSFS_setWriteDir("\save")!= 0)
 		LOG("ERROR at setting writing directory: %s", PHYSFS_getLastError());
 	else
 		LOG("Writing directory : %s", PHYSFS_getWriteDir());
-
+		*/
 
 	save_file.save(stream);
 	LOG("%s", stream.str().c_str());
 	App->fs->Save("game_state.xml", stream.str().c_str(), sizeof(stream));
+	//save_file.save_file("DATA_PUGI.xml");
 	return true;
 }
 

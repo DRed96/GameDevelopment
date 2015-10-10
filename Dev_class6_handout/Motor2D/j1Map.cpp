@@ -45,7 +45,8 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
 
 	// TODO 1: Add isometric map to world coordinates
-
+	ret.x = (x-y)* data.tile_width *0.5;
+	ret.y = (x + y)* data.tile_height *0.5;
 	return ret;
 }
 

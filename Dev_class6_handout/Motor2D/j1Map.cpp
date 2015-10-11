@@ -45,8 +45,11 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
 
 	// TODO 1: Add isometric map to world coordinates
-	ret.x = (x-y)* data.tile_width *0.5;
-	ret.y = (x + y)* data.tile_height *0.5;
+	if (data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x - y)* data.tile_width * 0.5;
+		ret.y = (x + y)* data.tile_height * 0.5;
+	}
 	return ret;
 }
 
@@ -55,8 +58,17 @@ iPoint j1Map::WorldToMap(int x, int y) const
 {
 	iPoint ret(0,0);
 	// TODO 2: Add orthographic world to map coordinates
-
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / data.tile_height;
+		ret.x = y / data.tile_width;
+	}
 	// TODO 3: Add the case for isometric maps to WorldToMap
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = x / data.width + y / data.height;
+		ret.y = y / data.height + x / data.width;
+	}
 	return ret;
 }
 

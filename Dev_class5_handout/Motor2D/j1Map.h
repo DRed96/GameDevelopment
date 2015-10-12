@@ -34,20 +34,6 @@ struct Layer
 // ----------------------------------------------------
 struct TileSet
 {
-	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
-	SDL_Rect GetTileRect(int id) const
-	{
-		SDL_Rect ret;
-		ret.w = tile_width - margin;
-		ret.h = tile_height - margin;
-		//Determinar la fila
-		ret.y = id / num_tiles_width;
-		//Determinar la columna
-		ret.x = (id % num_tiles_width * 4);
-
-		return ret;
-	}
-
 	p2SString			name;
 	int					firstgid;
 	int					margin;
@@ -61,6 +47,20 @@ struct TileSet
 	int					num_tiles_height;
 	int					offset_x;
 	int					offset_y;
+
+	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
+	SDL_Rect GetTileRect(int id) const
+	{
+		SDL_Rect ret;
+		ret.w = tile_width - margin;
+		ret.h = tile_height - margin;
+		//Determinar la fila
+		ret.y = id / num_tiles_width;
+		//Determinar la columna
+		ret.x = (id % num_tiles_width * 4);
+
+		return ret;
+	}
 
 };
 

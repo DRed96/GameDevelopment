@@ -33,26 +33,36 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	p2List_item<TileSet*> *tmp = data.tilesets.start;
+	p2List_item<TileSet*> *tileset_ptr = data.tilesets.start;
+	p2List_item<Layer*> *layer_ptr = data.layers.start;
 	bool checker1= true, checker2 = true;
-	int dx;
+	int dx = 0;
 	int dy = 0;
 	// TODO 5: Prepare theloop to draw all tilesets + Blit
-	/*
-	for (; tmp != NULL && checker1 == true; dy += data.tile_height)
+
+	for (; tileset_ptr != NULL && layer_ptr != NULL; tileset_ptr = tileset_ptr->next, layer_ptr = layer_ptr->next)
 	{
-		for (dx = 0; checker2 = true; dx += data.tile_width)
+		for (dy = 0 ;checker1 == true; dy++)
 		{
-			//if(id!=0)
-			//Get(x,y)
-			checker2 = (dx / data.tile_width) <= tmp->data->num_tiles_width;
+			for (dx = 0; checker2 == true; dx++)
+			{
+				if (layer_ptr->data->data != 0)
+				{
+					SDL_Rect texSection = tileset_ptr->data->GetTileRect(layer_ptr->data->Get(dx, dy));
+					iPoint drawCords = MapToWorld(dx, dy);
+					App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection, 0, 0);
+				}
+				
+				checker2 = dx < tileset_ptr->data->num_tiles_width;
+			}
+			checker1 = dy < tileset_ptr->data->num_tiles_height;
 		}
-		checker1 = (dy / data.tile_height) <= tmp->data->num_tiles_height;
 	}
-	*/
+
 	
 	// TODO 9: Complete the draw function
 }
+
 
 
 // Called before quitting

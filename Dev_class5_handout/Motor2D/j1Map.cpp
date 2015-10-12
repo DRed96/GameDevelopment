@@ -1,5 +1,6 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "p2List.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1FileSystem.h"
@@ -32,7 +33,23 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	// TODO 5: Prepare the loop to draw all tilesets + Blit
+	p2List_item<TileSet*> *tmp = data.tilesets.start;
+	bool checker1= true, checker2 = true;
+	int dx;
+	int dy = 0;
+	// TODO 5: Prepare theloop to draw all tilesets + Blit
+	/*
+	for (; tmp != NULL && checker1 == true; dy += data.tile_height)
+	{
+		for (dx = 0; checker2 = true; dx += data.tile_width)
+		{
+			//if(id!=0)
+			//Get(x,y)
+			checker2 = (dx / data.tile_width) <= tmp->data->num_tiles_width;
+		}
+		checker1 = (dy / data.tile_height) <= tmp->data->num_tiles_height;
+	}
+	*/
 	
 	// TODO 9: Complete the draw function
 }
@@ -305,3 +322,10 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	return ret;
 }
 
+iPoint j1Map::MapToWorld(int x, int y) const
+{
+	iPoint ret;
+	ret.x = x*data.tile_width;
+	ret.y = y*data.tile_height;
+	return ret;
+}

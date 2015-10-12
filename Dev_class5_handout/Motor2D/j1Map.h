@@ -52,8 +52,8 @@ struct TileSet
 	SDL_Rect GetTileRect(int id) const
 	{
 		SDL_Rect ret;
-		ret.w = tile_width - margin;
-		ret.h = tile_height - margin;
+		ret.w = tile_width;
+		ret.h = tile_height;
 		//Determinar la fila
 		ret.y = id / num_tiles_width;
 		//Determinar la columna

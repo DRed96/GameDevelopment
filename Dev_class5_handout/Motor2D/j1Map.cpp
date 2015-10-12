@@ -38,6 +38,7 @@ void j1Map::Draw()
 	bool checker1= true, checker2 = true;
 	int dx = 0;
 	int dy = 0;
+	uint result_id = 0;
 	// TODO 5: Prepare theloop to draw all tilesets + Blit
 
 	for (; tileset_ptr != NULL && layer_ptr != NULL; tileset_ptr = tileset_ptr->next, layer_ptr = layer_ptr->next)
@@ -46,22 +47,22 @@ void j1Map::Draw()
 		{
 			for (dx = 0; checker2 == true; dx++)
 			{
-				if (layer_ptr->data->data != 0)
+				uint result_id = layer_ptr->data->Get(dx, dy);
+				//if (result_id != 0)
 				{
-					SDL_Rect texSection = tileset_ptr->data->GetTileRect(layer_ptr->data->Get(dx, dy));
+					SDL_Rect texSection = tileset_ptr->data->GetTileRect(result_id);
 					iPoint drawCords = MapToWorld(dx, dy);
-					App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection, 0, 0);
+					App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection);
 				}
-				
-				checker2 = dx < tileset_ptr->data->num_tiles_width;
+				checker2 = dx < data.width;
 			}
-			checker1 = dy < tileset_ptr->data->num_tiles_height;
+			checker1 = dy < data.height;
 		}
 	}
-
-	
 	// TODO 9: Complete the draw function
 }
+
+	
 
 
 

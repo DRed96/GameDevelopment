@@ -57,6 +57,8 @@ private:
 	// Load config file
 	bool LoadConfig();
 
+	// Load config file
+	bool LoadSave();
 	// Call modules before each loop iteration
 	void PrepareUpdate();
 
@@ -74,7 +76,7 @@ private:
 
 	// Load / Save
 	bool LoadGameNow(const char *);
-	bool SavegameNow(const char *)/* const*/;
+	bool SaveGameNow(const char* filename);
 
 public:
 
@@ -102,7 +104,7 @@ private:
 	p2SString			organization;
 
 	//Save/Load Document XML vars
-	pugi::xml_document	save_file;
+	pugi::xml_document	load_file;
 	pugi::xml_node		saved_data;
 	//
 	mutable bool		want_to_save;

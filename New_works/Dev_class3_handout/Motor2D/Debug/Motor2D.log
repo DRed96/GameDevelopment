@@ -1,4 +1,4 @@
-﻿Build started 14/10/2015 17:09:10.
+﻿Build started 14/10/2015 19:40:53.
      1>Project "D:\Users\David\Documents\GitHub\GameDevelopment\New_works\Dev_class3_handout\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1App.cpp

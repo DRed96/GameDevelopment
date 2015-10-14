@@ -120,7 +120,6 @@ unsigned int j1FileSystem::Load(const char* file, char** buffer) const
 
 	return ret;
 }
-
 // Read a whole file and put it in a new buffer
 SDL_RWops* j1FileSystem::Load(const char* file) const
 {

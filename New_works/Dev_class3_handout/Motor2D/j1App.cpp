@@ -67,6 +67,7 @@ void j1App::AddModule(j1Module* module)
 bool j1App::Awake()
 {
 	bool ret = LoadConfig();
+	
 
 	// self-config
 	title.create(app_config.child("title").child_value());
@@ -83,8 +84,9 @@ bool j1App::Awake()
 			item = item->next;
 		}
 	}
-
-	return ret;
+	//Config directories
+	load_game += App->fs->GetSaveDirectory();
+	return ret == true;
 }
 
 // Called before the first frame
@@ -149,6 +151,10 @@ bool j1App::LoadConfig()
 	return ret;
 }
 
+bool j1App::LoadSave()
+{
+	return true;
+}
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
@@ -158,11 +164,14 @@ void j1App::PrepareUpdate()
 void j1App::FinishUpdate()
 {
 	// TODO 1: This is a good place to call load / Save functions
-	/*if (want_to_save == true)
-		doSave();*/
+	if (want_to_save == true)
+	{
+		SaveGameNow("save_file.xml");
+		want_to_save = false;
+	}
 	if (want_to_load == true)
 	{
-		LoadGameNow("DATA_LOAD.xml");
+		LoadGameNow("save_file.xml");
 		want_to_load = false;
 	}
 	
@@ -278,7 +287,7 @@ const char* j1App::GetOrganization() const
 
 void j1App::doSave()
 {
-	//saveNow
+	want_to_save = true;
 }
 void j1App::doLoad()
 {
@@ -286,36 +295,35 @@ void j1App::doLoad()
 	return;
 }
 
-// TODO 3: Create a simulation of the xml file to read 
 
-// TODO 4: Create a method to actually load an xml file
-// then call all the modules to load themselves
 bool j1App::LoadGameNow(const char* filename)
 {
 	//-------Open XML Document
-	//Unoptimal, needs to be changed
+
 	bool ret = true;
 
-	char* buf;
-	int size = App->fs->Load(filename, &buf);
-	pugi::xml_parse_result result = save_file.load_buffer(buf, size);
+	char* buf = NULL;
+	 int size = App->fs->Load(filename, &buf);
+	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
 	RELEASE(buf);
 
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file DATA_LOAD.xml. pugi error: %s", result.description());
+		LOG("Could not load map xml file save_file.xml. pugi error: %s", result.description());
 		ret = false;
 	}
 	else
 	{
-		saved_data = save_file.child("saved_data");
+		saved_data = load_file.child("saved_data");
 	}
 	//------------------
+	 
 
 	p2List_item<j1Module*> *module_ptr = NULL;
-	for (module_ptr = modules.start; module_ptr != NULL && ret == true; module_ptr = module_ptr->next)
+	for (module_ptr = modules.start; module_ptr != NULL &&ret== true; module_ptr = module_ptr->next)
 	{
-		module_ptr->data->Load(saved_data.child(module_ptr->data->name.GetString()));
+		bool debug = module_ptr->data->name == "file_system";
+		module_ptr->data->LoadState(saved_data.child(module_ptr->data->name.GetString()));
 	}
 
 	if (ret == false)
@@ -325,6 +333,36 @@ bool j1App::LoadGameNow(const char* filename)
 	return ret;
 }
 
+bool j1App::SaveGameNow(const char* filename)
+{
+	bool ret = true;
+	std::stringstream stream;
+	p2List_item<j1Module*> *module_ptr = NULL;
+	pugi::xml_document save_file;
+	pugi::xml_node save_node = save_file.append_child("game_state");
+	
+	for (module_ptr = modules.start; module_ptr != NULL &&ret == true; module_ptr = module_ptr->next)
+	{
+		module_ptr->data->SaveState(save_node.append_child(module_ptr->data->name.GetString()));
+	}
+	save_file.save(stream);
+	LOG("stream: %s", stream.str().c_str());
+	//Prepare the directory ?
+	//save_game = App->fs->GetSaveDirectory();
+	//save_game += ;
+	App->fs->Save(filename, stream.str().c_str(), stream.str().length());
+	LOG("stream after saving %s", stream.str().c_str());
+	if (ret == false)
+	{
+		LOG("problem at saving!");
+	}
+	return ret;
+}
+
+// TODO 3: Create a simulation of the xml file to read 
+
+// TODO 4: Create a method to actually load an xml file
+// then call all the modules to load themselves
 
 // TODO 7: Create a method to save the current state
 // First fill a pugui::xml_document

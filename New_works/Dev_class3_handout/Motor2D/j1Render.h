@@ -29,8 +29,8 @@ public:
 	bool CleanUp();
 
 	// Load / Save
-	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&) const;
+	/*bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;*/
 
 	// Blit
 	void SetViewPort(const SDL_Rect& rect);
@@ -43,7 +43,8 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 	//Save/Load
-	bool Load(pugi::xml_node toLoad);
+	bool j1Render::LoadState(pugi::xml_node&);
+	bool j1Render::SaveState(pugi::xml_node &);
 public:
 
 	SDL_Renderer*	renderer;

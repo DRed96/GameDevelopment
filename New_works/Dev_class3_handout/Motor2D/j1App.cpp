@@ -171,7 +171,7 @@ void j1App::FinishUpdate()
 	}
 	if (want_to_load == true)
 	{
-		LoadGameNow("save_file.xml");
+		LoadGameNow("save/save_file.xml");
 		want_to_load = false;
 	}
 	
@@ -301,7 +301,6 @@ bool j1App::LoadGameNow(const char* filename)
 	//-------Open XML Document
 
 	bool ret = true;
-
 	char* buf = NULL;
 	 int size = App->fs->Load(filename, &buf);
 	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
@@ -314,7 +313,13 @@ bool j1App::LoadGameNow(const char* filename)
 	}
 	else
 	{
-		saved_data = load_file.child("saved_data");
+		saved_data = load_file.child("game_state");
+		if (saved_data == NULL)
+		{
+			LOG("Could not find root node from save_file.xml. pugi error: %s", result.description());
+			ret = false;
+		}
+
 	}
 	//------------------
 	 
@@ -347,9 +352,6 @@ bool j1App::SaveGameNow(const char* filename)
 	}
 	save_file.save(stream);
 	LOG("stream: %s", stream.str().c_str());
-	//Prepare the directory ?
-	//save_game = App->fs->GetSaveDirectory();
-	//save_game += ;
 	App->fs->Save(filename, stream.str().c_str(), stream.str().length());
 	LOG("stream after saving %s", stream.str().c_str());
 	if (ret == false)

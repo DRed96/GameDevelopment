@@ -150,14 +150,14 @@ bool j1Map::Load(const char* file_name)
 			LOG("ERROR at iterating layers!");
 		data.layers.add(lays);
 	}
-	if(ret == true)
+	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
 
 		p2List_item<TileSet*>* item = data.tilesets.start;
-		while(item != NULL)
+		while (item != NULL)
 		{
 			TileSet* s = item->data;
 			LOG("Tileset ----");
@@ -169,15 +169,17 @@ bool j1Map::Load(const char* file_name)
 
 		/*Adapt this code with the names of your variables/structs*/
 		p2List_item<Layer*>* item_layer = data.layers.start;
-		while(item_layer != NULL)
+		while (item_layer != NULL)
 		{
 			Layer * l = item_layer->data;
 			LOG("Layer ----");
 			LOG("name: %s", l->name);
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
-		} 
+		}
 	}
+	else
+		LOG("Problem with loading tilesets/layers' data!");
 
 	map_loaded = ret;
 

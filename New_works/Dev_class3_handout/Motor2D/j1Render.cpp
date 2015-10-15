@@ -234,7 +234,7 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 bool j1Render::LoadState(pugi::xml_node& toLoad)
 {
-	bool ret = false;
+	bool ret = true;
 	camera.x = toLoad.child("camera").attribute("x").as_int();
 	camera.y = toLoad.child("camera").attribute("y").as_int();
 	return ret;

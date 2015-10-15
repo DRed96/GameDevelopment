@@ -35,17 +35,16 @@ void j1Map::Draw()
 
 	p2List_item<TileSet*> *tileset_ptr = data.tilesets.start;
 	p2List_item<Layer*> *layer_ptr = data.layers.start;
-	bool checker1= true, checker2 = true;
-	int dx = 0;
-	int dy = 0;
+	int dx;
+	int dy;
 	uint result_id = 0;
 	// TODO 5: Prepare theloop to draw all tilesets + Blit
 
 	for (; tileset_ptr != NULL && layer_ptr != NULL; tileset_ptr = tileset_ptr->next, layer_ptr = layer_ptr->next)
 	{
-		for (dy = 0 ;checker1 == true; dy++)
+		for (dy = 0; dy < data.height; dy++)
 		{
-			for (dx = 0; checker2 == true; dx++)
+			for (dx = 0; dx < data.width; dx++)
 			{
 				uint result_id = layer_ptr->data->Get(dx, dy);
 				//if (result_id != 0)
@@ -54,9 +53,7 @@ void j1Map::Draw()
 					iPoint drawCords = MapToWorld(dx, dy);
 					App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection);
 				}
-				checker2 = dx < data.width;
 			}
-			checker1 = dy < data.height;
 		}
 	}
 	// TODO 9: Complete the draw function
@@ -293,8 +290,8 @@ bool j1Map::LoadLayer(pugi::xml_node& node, Layer* layer)
 	{
 		layer->data[i] = tmp.attribute("gid").as_uint();
 	}
-	
-	memset(layer->data, 0, ((layer->width * layer->height)*sizeof(unsigned int)));
+	//What's the point on allocating if later you'll erase the data?
+	//memset(layer->data, 0, ((layer->width * layer->height)*sizeof(unsigned int)));
 	return ret;
 }
 

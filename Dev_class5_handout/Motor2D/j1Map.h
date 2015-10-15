@@ -51,17 +51,42 @@ struct TileSet
 	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const
 	{
-		SDL_Rect ret;
-	/*	float tmp_x = id;
-		float tmp_x2 = num_tiles_width;*/
+		
+			/*SDL_Rect ret;
+		float tmp_x = id;
+		float tmp_x2 = num_tiles_width;
 		ret.w = tile_width;
 		ret.h = tile_height;
 		//Determinar la fila
-		ret.y = id / num_tiles_width;
+		ret.y = gid / num_tiles_width * tile_height +spacing + margin;
 		//Determinar la columna
-		id%num_tiles_width;
+		if (id % num_tiles_width != 0)
+			ret.x = ((gid % num_tiles_width) - 1)* tile_width + 5;
+		else
+			ret.x = 8 * tile_width;
+		//ret.x-=
+	
 		//ret.x = () * num_tiles_width * tile_width;
-		return ret;
+		return ret;*/
+		uint gid = id - firstgid;
+		int tile_x;
+		int tile_y;
+		if(gid >= num_tiles_width)
+		{
+			tile_x = gid % num_tiles_width;
+			tile_y = (gid - tile_x) / num_tiles_width;
+		}
+		else
+		{
+			tile_x = gid;
+			tile_y = 0;
+		}
+		//LOG("tileID = %d, gid = %d, tile x = %d, tile y = %d", tileID, gid, tile_x, tile_y);
+		//pixel position
+		int x = tile_x*(tile_width + margin) + margin;
+		int y = tile_y*(tile_height + spacing) + spacing;
+
+		return{ x, y, tile_width, tile_height };
 	}
 
 };

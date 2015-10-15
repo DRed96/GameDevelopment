@@ -47,7 +47,7 @@ void j1Map::Draw()
 			for (dx = 0; dx < data.width; dx++)
 			{
 				uint result_id = layer_ptr->data->Get(dx, dy);
-				//if (result_id != 0)
+				if (result_id != 0)
 				{
 					SDL_Rect texSection = tileset_ptr->data->GetTileRect(result_id);
 					iPoint drawCords = MapToWorld(dx, dy);

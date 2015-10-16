@@ -286,12 +286,14 @@ bool j1Map::LoadLayer(pugi::xml_node& node, Layer* layer)
 
 	pugi::xml_node tmp = node.child("data").child("tile");
 
+	memset(layer->data, 0, ((layer->width * layer->height)*sizeof(unsigned int)));
+	
 	for (int i = 0; tmp != NULL; i++, tmp = tmp.next_sibling("tile"))
 	{
 		layer->data[i] = tmp.attribute("gid").as_uint();
 	}
-	//What's the point on allocating if later you'll erase the data?
-	//memset(layer->data, 0, ((layer->width * layer->height)*sizeof(unsigned int)));
+
+	
 	return ret;
 }
 

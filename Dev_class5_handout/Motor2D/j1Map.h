@@ -52,41 +52,21 @@ struct TileSet
 	SDL_Rect GetTileRect(int id) const
 	{
 		
-			/*SDL_Rect ret;
-		float tmp_x = id;
-		float tmp_x2 = num_tiles_width;
+		SDL_Rect ret;
+		int gid = id - firstgid;
+		int tile_x = 0;
+		int tile_y = 0;
 		ret.w = tile_width;
 		ret.h = tile_height;
-		//Determinar la fila
-		ret.y = gid / num_tiles_width * tile_height +spacing + margin;
-		//Determinar la columna
-		if (id % num_tiles_width != 0)
-			ret.x = ((gid % num_tiles_width) - 1)* tile_width + 5;
-		else
-			ret.x = 8 * tile_width;
-		//ret.x-=
-	
-		//ret.x = () * num_tiles_width * tile_width;
-		return ret;*/
-		uint gid = id - firstgid;
-		int tile_x;
-		int tile_y;
-		if(gid >= num_tiles_width)
-		{
-			tile_x = gid % num_tiles_width;
-			tile_y = (gid - tile_x) / num_tiles_width;
-		}
-		else
-		{
-			tile_x = gid;
-			tile_y = 0;
-		}
-		//LOG("tileID = %d, gid = %d, tile x = %d, tile y = %d", tileID, gid, tile_x, tile_y);
-		//pixel position
-		int x = tile_x*(tile_width + margin) + margin;
-		int y = tile_y*(tile_height + spacing) + spacing;
 
-		return{ x, y, tile_width, tile_height };
+		//Determinar la fila
+		tile_y = gid / num_tiles_width;
+		//Determinar la columna
+		tile_x = gid % num_tiles_width;
+
+		ret.x = tile_x*(tile_width + margin) + margin;
+		ret.y = tile_y*(tile_height + spacing) + spacing;
+		return ret;
 	}
 
 };

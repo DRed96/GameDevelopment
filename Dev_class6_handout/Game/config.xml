@@ -20,10 +20,11 @@
 
   <file_system>
     <path>data.zip</path>
+    <path>D:/Program Files (x86)/Tiled/</path>
   </file_system>
 
   <map>
-    <folder>maps/</folder>
+    <folder>examples/</folder>
   </map>
 
 </config>

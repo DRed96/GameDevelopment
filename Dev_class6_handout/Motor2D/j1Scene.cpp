@@ -31,8 +31,8 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 //	App->map->Load("hello2.tmx");
-	App->map->Load("iso.tmx");
-	
+	//App->map->Load("isometric_grass_and_water_2.tmx");
+	App->map->Load("sewers.tmx");
 	return true;
 }
 

@@ -66,17 +66,17 @@ iPoint j1Map::MapToWorld(int x, int y) const
 {
 	iPoint ret(0,0);
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
-	if (data.type == MAPTYPE_ORTHOGONAL)
-	{
-		ret.x = x*data.tile_width;
-		ret.y = y*data.tile_height;
-	}
-	// TODO 1: Add isometric map to world coordinates
-	if (data.type == MAPTYPE_ISOMETRIC)
-	{
-		
-		ret.x = ((x - y)* tile_width_half) - tile_width_half;
-		ret.y = ((x + y)* tile_height_half) - tile_height_half;
+	switch (data.type){
+
+		case  MAPTYPE_ISOMETRIC:
+			ret.x = ((x - y)* tile_width_half) - tile_width_half;
+			ret.y = ((x + y)* tile_height_half) - tile_height_half;
+		break;
+
+		default: 
+			ret.x = x*data.tile_width;
+			ret.y = y*data.tile_height;
+		break;
 	}
 	return ret;
 }
@@ -160,7 +160,7 @@ bool j1Map::Load(const char* file_name)
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
-	char* buf;
+	char* buf = NULL;
 	int size = App->fs->Load(tmp.GetString(), &buf);
 	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
 

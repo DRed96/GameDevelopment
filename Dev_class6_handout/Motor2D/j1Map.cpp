@@ -22,7 +22,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	LOG("Loading Map Parser");
 	bool ret = true;
 
-	folder.create(config.child("folder").child_value());
+	//folder.create(config.child("folder").child_value());
 
 	return ret;
 }
@@ -90,7 +90,7 @@ iPoint j1Map::WorldToMap(int x, int y) const
 	if (data.type == MAPTYPE_ORTHOGONAL)
 	{
 		ret.x = x / data.tile_height;
-		ret.x = y / data.tile_width;
+		ret.y = y / data.tile_width;
 	}
 	// TODO 3: Add the case for isometric maps to WorldToMap
 	else if (data.type == MAPTYPE_ISOMETRIC)
@@ -158,10 +158,10 @@ bool j1Map::CleanUp()
 bool j1Map::Load(const char* file_name)
 {
 	bool ret = true;
-	p2SString tmp("%s%s", folder.GetString(), file_name);
+	//folder : p2SString tmp("%s%s", folder.GetString(), file_name);
 
 	char* buf = NULL;
-	int size = App->fs->Load(tmp.GetString(), &buf);
+	int size = App->fs->Load(file_name, &buf);
 	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
 
 	RELEASE(buf);
@@ -209,14 +209,14 @@ bool j1Map::Load(const char* file_name)
 			data.layers.add(lay);
 	}
 
-	if(ret == true)
+	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
 
 		p2List_item<TileSet*>* item = data.tilesets.start;
-		while(item != NULL)
+		while (item != NULL)
 		{
 			TileSet* s = item->data;
 			LOG("Tileset ----");
@@ -227,7 +227,7 @@ bool j1Map::Load(const char* file_name)
 		}
 
 		p2List_item<MapLayer*>* item_layer = data.layers.start;
-		while(item_layer != NULL)
+		while (item_layer != NULL)
 		{
 			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
@@ -236,7 +236,8 @@ bool j1Map::Load(const char* file_name)
 			item_layer = item_layer->next;
 		}
 	}
-
+	else
+		LOG("Error at map loading :(");
 	map_loaded = ret;
 
 	return ret;
@@ -347,7 +348,8 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
+		//folder : set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
+		set->texture = App->tex->Load(image.attribute("source").as_string());
 		int w, h;
 		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
 		set->tex_width = image.attribute("width").as_int();

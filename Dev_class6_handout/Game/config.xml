@@ -20,11 +20,22 @@
 
   <file_system>
     <path>data.zip</path>
-    <path>D:/Program Files (x86)/Tiled/</path>
+    <path>D:/Program Files (x86)/Tiled/examples/</path>
+    <!--This  ^^  needs to be changed in each computer-->
+    <path>maps/</path>
   </file_system>
 
   <map>
-    <folder>examples/</folder>
+   <!-- 
+   <folder>examples/</folder>
+   -->
+    <!--This  ^^ No longer needs to be changed in each computer because I'm awesome >:D-->
+    <map1>desert.tmx</map1>
+    <map2>hexagonal-mini.tmx</map2>
+    <map3>isometric_grass_and_water_2.tmx</map3>
+    <map4>sewers.tmx</map4>
+    <map5>iso.tmx</map5>
+    <map6>hello2.tmx</map6>
   </map>
 
 </config>

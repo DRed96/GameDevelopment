@@ -49,10 +49,8 @@ void j1Map::Draw()
 				{
 					SDL_Rect texSection = tileset_ptr->data->GetTileRect(result_id);
 					iPoint drawCords = MapToWorld(dx, dy);
-					if (dx == 0)
 					App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection);
-					if (dy == 0)
-						App->render->Blit(tileset_ptr->data->texture, drawCords.x, drawCords.y, &texSection);
+				
 
 				}
 			}
@@ -68,12 +66,17 @@ iPoint j1Map::MapToWorld(int x, int y) const
 {
 	iPoint ret(0,0);
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
-
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x*data.tile_width;
+		ret.y = y*data.tile_height;
+	}
 	// TODO 1: Add isometric map to world coordinates
 	if (data.type == MAPTYPE_ISOMETRIC)
 	{
-		ret.x = ((x - y)* data.tile_width * 0.5) - data.tile_width * 0.5;
-		ret.y = ((x + y)* data.tile_height * 0.5)- data.tile_height * 0.5;
+		
+		ret.x = ((x - y)* tile_width_half) - tile_width_half;
+		ret.y = ((x + y)* tile_height_half) - tile_height_half;
 	}
 	return ret;
 }
@@ -92,8 +95,8 @@ iPoint j1Map::WorldToMap(int x, int y) const
 	// TODO 3: Add the case for isometric maps to WorldToMap
 	else if (data.type == MAPTYPE_ISOMETRIC)
 	{
-		ret.x = x / data.width + y / data.height;
-		ret.y = y / data.height  - x /data.width;
+		ret.x = (x / tile_width_half + y / tile_height_half) / 2;
+		ret.y = (y / tile_height_half - (x / tile_width_half)) / 2;
 
 	}
 	return ret;
@@ -302,6 +305,8 @@ bool j1Map::LoadMap()
 		}
 	}
 
+	tile_width_half = data.tile_width / 2;
+	tile_height_half = data.tile_height / 2;
 	return ret;
 }
 

@@ -105,7 +105,8 @@ private:
 public:
 
 	MapData data;
-
+	int tile_width_half = 0;
+	int tile_height_half = 0;
 private:
 
 	pugi::xml_document	map_file;

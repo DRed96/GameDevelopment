@@ -18,20 +18,24 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-	
+	currentVolume = config.child("volume").attribute("default").as_uint(-1);
+	if (currentVolume == -1)
+		LOG("Error at accessing volume data");
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene::Start()
 {
-	currentVolume = 64;
 	img = App->tex->Load("textures/test.png");
 	App->audio->PlayMusic("audio/music/music_sadpiano.ogg");
+	
+	App->audio->controlVol(currentVolume);
+	App->audio->controlVol(currentVolume);
 	return true;
 }
 
@@ -56,7 +60,7 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->render->camera.y += 1;
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		App->render->camera.x -= 1;
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
@@ -64,11 +68,13 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
 	{
-		App->audio->controlVol((currentVolume += 32));
+		currentVolume += 32;
+		App->audio->controlVol(currentVolume);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN)
 	{
-		App->audio->controlVol((currentVolume -= 32));
+		currentVolume -= 32;
+		App->audio->controlVol(currentVolume);
 	}
 	App->render->Blit(img, 0, 0);
 	return true;

@@ -9,7 +9,11 @@
   <renderer>
     <vsync value="false"/>
   </renderer>
-
+  
+  <scene>
+    <volume default ="96"/>
+  </scene>
+  
   <window>
     <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>

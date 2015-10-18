@@ -33,7 +33,7 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
 	//Control volume
-	bool controlVol(unsigned int vol);
+	bool controlVol(int& vol);
 
 private:
 

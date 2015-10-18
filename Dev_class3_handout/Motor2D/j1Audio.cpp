@@ -173,15 +173,20 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
-bool j1Audio::controlVol(unsigned int vol)
+bool j1Audio::controlVol(int &vol)
 {
 	bool ret = true;
+	if (vol > 128)
+		vol = 128;
+	if (vol < 0)
+		vol = 0;
+		
 	int debug = Mix_VolumeMusic(vol);
 	if (debug == -1)
 	{
-		LOG("Error at changing the volume!");
+		LOG("Error at changing the volume! %s", Mix_GetError());
 		ret = false;
 	}
-	LOG("Volume should be %i", debug);
+	LOG("Volume should be %i" debug);
 	return ret;
 }

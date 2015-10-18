@@ -19,6 +19,11 @@ public:
 
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
+	
+	//Called at first frame
+	bool Start();
+	//Update
+	bool Update(float dt);
 
 	// Called before quitting
 	bool CleanUp();
@@ -35,8 +40,13 @@ public:
 	//Control volume
 	bool controlVol(int& vol);
 
+	bool LoadState(pugi::xml_node&);
+	bool SaveState(pugi::xml_node&);
+public:
+	//The value of overall game volume [0,128]
+	int currentVolume;
 private:
-
+	
 	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
 };

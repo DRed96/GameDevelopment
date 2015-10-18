@@ -15,7 +15,7 @@ public:
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&);
+	bool Awake();
 
 	// Called before the first frame
 	bool Start();
@@ -31,8 +31,6 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-public:
-	int currentVolume;
 private:
 	SDL_Texture* img;
 	

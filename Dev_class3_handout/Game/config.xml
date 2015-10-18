@@ -8,12 +8,7 @@
 	
   <renderer>
     <vsync value="false"/>
-  </renderer>
-  
-  <scene>
-    <volume default ="96"/>
-  </scene>
-  
+  </renderer>  
   <window>
     <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>
@@ -26,5 +21,9 @@
     <path>data.zip</path>
     <path>data2.zip</path>
   </file_system>
+
+  <audio>
+    <volume default ="96"/>
+  </audio>
 
 </config>

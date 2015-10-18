@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1FileSystem.h"
 #include "j1Audio.h"
+#include "j1Input.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -51,9 +52,30 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
+	currentVolume = config.child("volume").attribute("default").as_uint(-1);
+	if (currentVolume == -1)
+		LOG("Error at accessing volume data");
 	return ret;
 }
 
+bool j1Audio::Start()
+{
+	App->audio->controlVol(currentVolume);
+	App->audio->controlVol(currentVolume);
+	return true;
+}
+bool j1Audio::Update(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
+	{	currentVolume += 32;
+		controlVol(currentVolume);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN)
+	{	currentVolume -= 32;
+		controlVol(currentVolume);
+	}
+	return true;
+}
 // Called before quitting
 bool j1Audio::CleanUp()
 {
@@ -181,12 +203,24 @@ bool j1Audio::controlVol(int &vol)
 	if (vol < 0)
 		vol = 0;
 		
-	int debug = Mix_VolumeMusic(vol);
-	if (debug == -1)
+	if (Mix_VolumeMusic(vol) == -1)
 	{
 		LOG("Error at changing the volume! %s", Mix_GetError());
 		ret = false;
 	}
-	LOG("Volume should be %i" debug);
+	LOG("Volume should be %i", vol);
 	return ret;
+}
+
+bool j1Audio::LoadState(pugi::xml_node& loader)
+{
+	currentVolume = loader.child("volume").attribute("current").as_int();
+	controlVol(currentVolume);
+	return true;
+}
+
+bool j1Audio::SaveState(pugi::xml_node& saver)
+{
+	saver.append_child("volume").append_attribute("current").set_value(currentVolume);
+	return true;
 }

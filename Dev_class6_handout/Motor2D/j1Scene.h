@@ -15,7 +15,7 @@ public:
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node & config);
+	bool Awake();
 
 	// Called before the first frame
 	bool Start();

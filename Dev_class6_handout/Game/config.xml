@@ -32,7 +32,7 @@
    <folder>examples/</folder>
    -->
     <!--This  ^^ No longer needs to be changed in each computer because I'm awesome >:D-->
-     <map1>desert.tmx</map1>
+    <map1>desert.tmx</map1>
     <map2>hexagonal-mini.tmx</map2>
     <map3>isometric_grass_and_water_2.tmx</map3>
     <map4>sewers.tmx</map4>

@@ -22,10 +22,12 @@ bool j1Map::Awake(pugi::xml_node& config)
 {
 	
 	LOG("Loading Map Parser");
-	map_name = new char[25];
+	const char* tmp = config.child_value("map6");
+	int size = strlen(tmp) + 1;
+	map_name = new char[size];
 	bool ret = true;
-	folder.create(config.child("folder").child_value());
-	strcpy_s(map_name,25, config.child_value("map6"));
+//	folder.create(config.child("folder").child_value());
+	strcpy_s(map_name,size, tmp);
 	return ret;
 }
 

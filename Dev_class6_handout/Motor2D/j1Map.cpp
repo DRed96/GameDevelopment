@@ -9,6 +9,7 @@
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
+	
 	name.create("map");
 }
 
@@ -19,11 +20,12 @@ j1Map::~j1Map()
 // Called before render is available
 bool j1Map::Awake(pugi::xml_node& config)
 {
+	
 	LOG("Loading Map Parser");
+	map_name = new char[25];
 	bool ret = true;
-
-	//folder.create(config.child("folder").child_value());
-
+	folder.create(config.child("folder").child_value());
+	strcpy_s(map_name,25, config.child_value("map6"));
 	return ret;
 }
 
@@ -151,6 +153,7 @@ bool j1Map::CleanUp()
 	// Clean up the pugui tree
 	map_file.reset();
 
+	//Clean up map name
 	return true;
 }
 

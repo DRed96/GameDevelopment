@@ -19,20 +19,20 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
+	
 	bool ret = true;
-
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene::Start()
 {
-	
-	App->map->Load("isometric_grass_and_water_2.tmx");
-	//App->map->Load("hello2.tmx");
+	App->map->Load(App->map->map_name);
+	//App->map->Load("isometric_grass_and_water_2.tmx");
+
 	
 	return true;
 }
@@ -63,6 +63,10 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
+
+	/*Unfinished cool idea
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		App->map->Load("iso.tmx");*/
 
 	App->map->Draw();
 

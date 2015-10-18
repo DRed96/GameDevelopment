@@ -80,7 +80,7 @@ public:
 	virtual ~j1Map();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node& conf);
+	bool Awake(pugi::xml_node& config);
 
 	// Called each loop iteration
 	void Draw();
@@ -107,10 +107,12 @@ public:
 	MapData data;
 	int tile_width_half = 0;
 	int tile_height_half = 0;
+	char * map_name = NULL;
 private:
 
 	pugi::xml_document	map_file;
-	//p2SString			folder;
+	
+	p2SString			folder;
 	bool				map_loaded;
 };
 

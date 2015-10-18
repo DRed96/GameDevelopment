@@ -89,6 +89,9 @@ bool j1FileSystem::IsDirectory(const char* file) const
 }
 
 // Read a whole file and put it in a new buffer
+/*
+You need to use double pointer to be able to pass a reference of a pointer, if not you wouldn't be able to to make changes in pointers you recieve as arguments
+*/
 unsigned int j1FileSystem::Load(const char* file, char** buffer) const
 {
 	unsigned int ret = 0;

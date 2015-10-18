@@ -1,10 +1,10 @@
-﻿Compilación iniciada a las 09/10/2015 11:05:51.
-     1>Proyecto "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" en el nodo 2 (Build destinos).
+﻿Build started 18/10/2015 13:16:02.
+     1>Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1App.cpp
-         j1App.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1Scene.cpp
+         j1Scene.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.lib" /MACHINE:X86 Debug\j1FileSystem.obj
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.lib" /MACHINE:X86 Debug\j1FileSystem.obj
          Debug\j1Main.obj
          Debug\j1App.obj
          Debug\j1Audio.obj
@@ -15,9 +15,9 @@
          Debug\j1Textures.obj
          Debug\j1Window.obj
          Debug\pugixml.obj
-         Motor2D.vcxproj -> D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.exe
-     1>Compilación del proyecto terminada "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" (Build destinos).
+         Motor2D.vcxproj -> D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Debug\Motor 2D.exe
+     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class3_handout\Motor2D\Motor2D.vcxproj" (Build target(s)).
 
-Compilación correcta.
+Build succeeded.
 
-Tiempo transcurrido 00:00:02.93
+Time Elapsed 00:00:00.95

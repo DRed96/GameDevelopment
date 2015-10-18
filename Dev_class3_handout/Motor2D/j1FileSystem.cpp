@@ -15,8 +15,7 @@ j1FileSystem::j1FileSystem() : j1Module()
 	char* base_path = SDL_GetBasePath();
 	PHYSFS_init(base_path);
 	SDL_free(base_path);
-	//Let's see if it sorta works out
-	PHYSFS_permitSymbolicLinks(1);
+
 	// By default we include executable's own directory
 	// without this we won't be able to find config.xml :-(
 	AddPath(".");
@@ -60,8 +59,7 @@ bool j1FileSystem::Awake(pugi::xml_node& config)
 // Called before quitting
 bool j1FileSystem::CleanUp()
 {
-	//PHYSFS_freeList();
-	LOG("Freeing File System subsystem");
+	//LOG("Freeing File System subsystem");
 	return true;
 }
 
@@ -122,7 +120,6 @@ unsigned int j1FileSystem::Load(const char* file, char** buffer) const
 
 	return ret;
 }
-
 // Read a whole file and put it in a new buffer
 SDL_RWops* j1FileSystem::Load(const char* file) const
 {
@@ -149,18 +146,14 @@ int close_sdl_rwops(SDL_RWops *rw)
 }
 
 // Save a whole buffer to disk
-//QUE: Optimize size!!!!!!!!!!!!!!!!!!!!!!!
 unsigned int j1FileSystem::Save(const char* file, const char* buffer, unsigned int size) const
 {
 	unsigned int ret = 0;
-	//PHYSFS_addToSearchPath(file, 1);
-	//PHYSFS_setWriteDir("Dev_class3_handout/Game/data_files.xml");
 
 	PHYSFS_file* fs_file = PHYSFS_openWrite(file);
 
 	if(fs_file != NULL)
 	{
-		PHYSFS_file* debug2 = PHYSFS_openWrite("data_files.xml");
 		PHYSFS_sint64 written = PHYSFS_write(fs_file, (const void*)buffer, 1, size);
 		if(written != size)
 			LOG("File System error while writing to file %s: %s\n", file, PHYSFS_getLastError());

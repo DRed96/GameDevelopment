@@ -88,30 +88,10 @@ bool j1Render::CleanUp()
 }
 
 // TODO 6: Create a method to load the state
-bool j1Render::loadNow(pugi::xml_node& data)
-{
-	data = data.child("renderer").child("camera_pos");
-	//----------
-	camera.x = data.attribute("x").as_int(/*def = */-1);
-	camera.y = data.attribute("y").as_int(/*def = */-1);
-	return camera.x != -1 && camera.y != -1;
-}
+// for now it will be camera's x and y
+
 // TODO 8: Create a method to save the state
 // using append_child and append_attribute
-bool j1Render::saveNow(pugi::xml_node& data)
-{
-	data = data.append_child("camera");
-	data.append_attribute("x").set_value(camera.x);
-	data.append_attribute("y").set_value(camera.y);
-
-	int checker_x = data.attribute("x").as_int();
-	int checker_y = data.attribute("y").as_int();
-
-	return checker_x == camera.x && checker_y == camera.y;
-}
-
-
-
 
 void j1Render::SetBackgroundColor(SDL_Color color)
 {
@@ -252,7 +232,23 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 	return ret;
 }
 
-void safe()
+bool j1Render::LoadState(pugi::xml_node& toLoad)
 {
+	bool ret = true;
+	camera.x = toLoad.child("camera").attribute("x").as_int();
+	camera.y = toLoad.child("camera").attribute("y").as_int();
+	return ret;
+}
 
+bool j1Render::SaveState(pugi::xml_node& toSave)
+{
+	bool ret = false;
+	toSave = toSave.append_child("camera");
+
+	toSave.append_attribute("x").set_value(camera.x);
+	toSave.append_attribute("y").set_value(camera.y);
+	int checker_1; int checker_2;
+	checker_1 = toSave.attribute("x").as_int() - camera.x;
+	checker_2 = toSave.attribute("y").as_int() - camera.y;
+	return checker_1 == 0 && checker_2 == 0;
 }

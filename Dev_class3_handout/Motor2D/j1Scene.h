@@ -8,7 +8,7 @@ struct SDL_Texture;
 class j1Scene : public j1Module
 {
 public:
-
+	
 	j1Scene();
 
 	// Destructor
@@ -31,9 +31,11 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
+public:
+	unsigned int currentVolume;
 private:
 	SDL_Texture* img;
+	
 };
 
 #endif // __j1SCENE_H__

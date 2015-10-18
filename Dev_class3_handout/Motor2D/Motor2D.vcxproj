@@ -106,12 +106,6 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Alternative save.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="..\Game\data_files.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

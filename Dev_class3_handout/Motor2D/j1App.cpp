@@ -13,7 +13,6 @@
 #include "j1FileSystem.h"
 #include "j1App.h"
 
-#include "PhysFS/include/physfs.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -34,7 +33,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
-	//AddModule(audio);
+	AddModule(audio);
 	AddModule(scene);
 
 	// render last to swap buffer
@@ -68,6 +67,8 @@ void j1App::AddModule(j1Module* module)
 bool j1App::Awake()
 {
 	bool ret = LoadConfig();
+	
+
 	// self-config
 	title.create(app_config.child("title").child_value());
 	organization.create(app_config.child("organization").child_value());
@@ -79,12 +80,12 @@ bool j1App::Awake()
 
 		while(item != NULL && ret == true)
 		{
-			const char* debug = item->data->name.GetString();
 			ret = item->data->Awake(config.child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}
-
+	//Config directories
+	load_game += App->fs->GetSaveDirectory();
 	return ret == true;
 }
 
@@ -150,34 +151,9 @@ bool j1App::LoadConfig()
 	return ret;
 }
 
-bool j1App::loadData()
+bool j1App::LoadSave()
 {
-	bool ret = true;
-
-	char* buf = NULL;
-	int size = App->fs->Load("game_files.xml", &buf);
-	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
-	RELEASE(buf);
-	if (result == NULL)
-	{
-		LOG("Could not load map xml file data_files.xml pugi error: %s", result.description());
-		ret = false;
-	}
-	else
-	{
-		load = load_file.child("saved_data");
-		//app_save =save.child("app");
-	}
-
-	return ret;
-}
-
-bool j1App::loadSave()
-{
-	bool ret = true;
-	/*char* buf;
-	int size = App->fs->Load("game_files.xml", &buf);*/
-	return ret;
+	return true;
 }
 // ---------------------------------------------
 void j1App::PrepareUpdate()
@@ -188,17 +164,17 @@ void j1App::PrepareUpdate()
 void j1App::FinishUpdate()
 {
 	// TODO 1: This is a good place to call load / Save functions
-	if (want_to_save)
+	if (want_to_save == true)
 	{
-		SaveGameNow();
-		want_to_save = false;	
+		SaveGameNow("save_file.xml");
+		want_to_save = false;
 	}
-
-	if (want_to_load)
+	if (want_to_load == true)
 	{
-		LoadGameNow();
+		LoadGameNow("save/save_file.xml");
 		want_to_load = false;
 	}
+	
 }
 
 // Call modules before each loop iteration
@@ -309,45 +285,86 @@ const char* j1App::GetOrganization() const
 	return organization.GetString();
 }
 
-void j1App::doSave(const char* filename)
+void j1App::doSave()
 {
 	want_to_save = true;
-	save_game.create(filename);
 }
-
-void j1App::doLoad(const char* filename)
+void j1App::doLoad()
 {
 	want_to_load = true;
-	load_game.create(filename);
+	return;
+}
+
+
+bool j1App::LoadGameNow(const char* filename)
+{
+	//-------Open XML Document
+
+	bool ret = true;
+	char* buf = NULL;
+	 int size = App->fs->Load(filename, &buf);
+	pugi::xml_parse_result result = load_file.load_buffer(buf, size);
+	RELEASE(buf);
+
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file save_file.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		saved_data = load_file.child("game_state");
+		if (saved_data == NULL)
+		{
+			LOG("Could not find root node from save_file.xml. pugi error: %s", result.description());
+			ret = false;
+		}
+
+	}
+	//------------------
+	 
+
+	p2List_item<j1Module*> *module_ptr = NULL;
+	for (module_ptr = modules.start; module_ptr != NULL &&ret== true; module_ptr = module_ptr->next)
+	{
+		bool debug = module_ptr->data->name == "file_system";
+		module_ptr->data->LoadState(saved_data.child(module_ptr->data->name.GetString()));
+	}
+
+	if (ret == false)
+	{
+		LOG("Error at loading the file : %s", module_ptr->data->name);
+	}
+	return ret;
+}
+
+bool j1App::SaveGameNow(const char* filename)
+{
+	bool ret = true;
+	std::stringstream stream;
+	p2List_item<j1Module*> *module_ptr = NULL;
+	pugi::xml_document save_file;
+	pugi::xml_node save_node = save_file.append_child("game_state");
+	
+	for (module_ptr = modules.start; module_ptr != NULL &&ret == true; module_ptr = module_ptr->next)
+	{
+		module_ptr->data->SaveState(save_node.append_child(module_ptr->data->name.GetString()));
+	}
+	save_file.save(stream);
+	LOG("stream: %s", stream.str().c_str());
+	App->fs->Save(filename, stream.str().c_str(), stream.str().length());
+	LOG("stream after saving %s", stream.str().c_str());
+	if (ret == false)
+	{
+		LOG("problem at saving!");
+	}
+	return ret;
 }
 
 // TODO 3: Create a simulation of the xml file to read 
 
 // TODO 4: Create a method to actually load an xml file
 // then call all the modules to load themselves
-bool j1App::LoadGameNow()
-{
-	bool ret = loadData();
-
-	p2List_item<j1Module*>* item;
-	item = modules.start;
-
-	const char* debug = NULL;
-	item->data->loadNow(load);//save
-		
-	for (item = modules.start; item != NULL && ret == true; item = item->next)
-	{
-		debug = item->data->name.GetString();
-	
-		ret = item->data->loadNow(load);
-	}
-
-	if (!ret)
-		LOG("Error at function loadNow File %s", debug);
-
-	return ret;
-}
-
 
 // TODO 7: Create a method to save the current state
 // First fill a pugui::xml_document
@@ -355,56 +372,3 @@ bool j1App::LoadGameNow()
 // std::stringstream stream;
 // my_xml_document.save(stream);
 // then access it via stream.str().c_str()
-bool j1App::SaveGameNow()
-{
-	bool ret = true;
-	p2List_item<j1Module*>* item;
-	//where the data goes
-	std::stringstream stream;
-	for (item = modules.start; item != NULL && ret == true; item = item->next)
-	{
-		ret = item->data->saveNow(save_file.append_child(item->data->name.GetString()));
-	}
-	const char * dir = App->fs->GetSaveDirectory();
-	/*if (PHYSFS_setWriteDir("\save")!= 0)
-		LOG("ERROR at setting writing directory: %s", PHYSFS_getLastError());
-	else
-		LOG("Writing directory : %s", PHYSFS_getWriteDir());
-		*/
-
-	save_file.save(stream);
-	LOG("%s", stream.str().c_str());
-	App->fs->Save("game_state.xml", stream.str().c_str(), sizeof(stream));
-	//save_file.save_file("DATA_PUGI.xml");
-	return true;
-}
-
-
-
-/*
-bool ret = true;
-std::stringstream data_stream;
-char * buff = NULL;
-
-const char* debug = NULL;
-save = save_file.append_child("game_states");
-p2List_item<j1Module*>* item;
-item = modules.start;
-while (item != NULL && ret == true)
-{
-debug = item->data->name.GetString();
-ret = item->data->saveNow(save.append_child(item->data->name.GetString()));
-item = item->next;
-}
-
-//	PHYSFS_permitSymbolicLinks(1);
-
-unsigned int size = sizeof(save_file);
-//When save_file is full of data, we pass it to a stringstream
-save_file.save(data_stream);
-App->fs->Save("data_files.xml", data_stream.str().c_str(), size);
-
-PHYSFS_file* debug2 = PHYSFS_openRead("data_files.xml");
-if (!ret)
-LOG("Error at function saveNow. File %s", debug);
-return ret;*/

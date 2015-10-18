@@ -29,19 +29,6 @@ public:
 		return true;
 	}
 
-	//--------------- TMP
-	// TODO 2: Create new virtual methods to Load and Save
-	virtual bool saveNow(pugi::xml_node& data)
-	{
-		return true;
-	}
-	
-	virtual bool loadNow(pugi::xml_node& data)
-	{
-		return true;
-	}
-	//--------------- TMP
-
 	// Called before the first frame
 	virtual bool Start()
 	{
@@ -71,13 +58,22 @@ public:
 	{
 		return true;
 	}
-	
-	
+
+	// TODO 2: Create new virtual methods to Load and Save
+	virtual bool LoadState(pugi::xml_node&)
+	{
+		return true;
+	}
+	virtual bool SaveState(pugi::xml_node&)
+	{
+		return true;
+	}
 
 public:
 
 	p2SString	name;
 	bool		active;
+
 };
 
 #endif // __j1MODULE_H__

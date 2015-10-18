@@ -46,21 +46,19 @@ public:
 	const char* GetOrganization() const;
 
 	// TODO 1: Create methods to save and load
-	void doSave(const char * filename);
-	void doLoad(const char * filename);
 	// that can be called anytime, even if they 
 	// will one execute by the very end of the frame
 	// Load / Save
+	void doLoad();
+	void doSave();
 
 private:
 
 	// Load config file
 	bool LoadConfig();
 
-	//Load "load" file
-	bool loadData();
-	//Load save file
-	bool loadSave();
+	// Load config file
+	bool LoadSave();
 	// Call modules before each loop iteration
 	void PrepareUpdate();
 
@@ -77,8 +75,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	bool LoadGameNow();
-	bool SaveGameNow();
+	bool LoadGameNow(const char *);
+	bool SaveGameNow(const char* filename);
 
 public:
 
@@ -99,19 +97,16 @@ private:
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
-
-	pugi::xml_document	save_file;
-	pugi::xml_node		save;
-
-	pugi::xml_document	load_file;
-	pugi::xml_node		load;
-
 	int					argc;
 	char**				args;
 
 	p2SString			title;
 	p2SString			organization;
 
+	//Save/Load Document XML vars
+	pugi::xml_document	load_file;
+	pugi::xml_node		saved_data;
+	//
 	mutable bool		want_to_save;
 	bool				want_to_load;
 	p2SString			load_game;

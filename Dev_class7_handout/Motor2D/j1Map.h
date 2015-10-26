@@ -16,18 +16,19 @@ struct Properties
 	// TODO 7: Our custom properties should have one method
 	// to ask for the value of a custom property
 	
+	bool askProperty(const char * propname);
 	~Properties()
 	{
 		//Delete the memory allocated in the char *
-		p2List_item<const char*>* tmp = propsName.start;
+		/*p2List_item<const char*>* tmp = propsName.start;
 		while(tmp)
 		{
 			if (tmp->data != NULL)
 			{
-				delete[]tmp->data;
+				delete tmp->data;
 			}
 			tmp = tmp->next;
-		}
+		}*/
 	}
 
 };

@@ -47,7 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// render last to swap buffer
 	AddModule(render);
-	LOG("App Constructor --------  \n %i \n -------- \n", timer.ReadMs());
+	LOG("App Constructor --------  \n %f \n -------- \n", timer.ReadMs());
 }
 
 // Destructor

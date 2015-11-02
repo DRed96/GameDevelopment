@@ -16,7 +16,7 @@ struct Properties
 	// TODO 7: Our custom properties should have one method
 	// to ask for the value of a custom property
 	
-	bool askProperty(const char * propname);
+	bool askProperty(const char * propname, );
 	~Properties()
 	{
 		//Delete the memory allocated in the char *

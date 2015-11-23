@@ -43,9 +43,9 @@ bool j1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-
+	SDL_Texture* bannerTex = App->tex->Load("gui/atlas.png");
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
-
+//	banner = App->gui->createImage(bannerTex, {485, 829, 328, 103});
 
 	return true;
 }

@@ -23,7 +23,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
-
+	
 	return ret;
 }
 
@@ -51,7 +51,8 @@ bool j1Gui::PostUpdate()
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-
+	/*images.del();
+	labels.del();*/
 	return true;
 }
 
@@ -72,7 +73,8 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	ret->rect.y = y;
 	ret->rect.w = w;
 	ret->rect.h = h;
-
+	
+//	labels.Add(ret);
 	return ret;
 }
 UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
@@ -82,7 +84,8 @@ UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
 
 	ret->image = image;
 	ret->rect = rect;
-
+	
+	//labels.Add(ret);
 	return ret;
 }
 
@@ -98,6 +101,7 @@ UI_label* createLabel(char* text, int x, int y, int w, int h)
 	ret->rect.w = w;
 	ret->rect.h = h;
 
+	//images.Add(ret);
 	return ret;
 }
 UI_label* createLabel(char* text, SDL_Rect rect)
@@ -108,5 +112,6 @@ UI_label* createLabel(char* text, SDL_Rect rect)
 	ret->text = text;
 	ret->rect = rect;
 
+	//images.Add(ret);
 	return ret;
 }

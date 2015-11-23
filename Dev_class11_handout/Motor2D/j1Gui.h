@@ -5,6 +5,7 @@
 #include "UI Class structure.h"
 #define CURSOR_WIDTH 2
 
+#include "p2DynArray.h"
 // TODO 1: Create your structure of classes
 
 // ---------------------------------------------------
@@ -43,7 +44,10 @@ public:
 	const SDL_Texture* GetAtlas() const;
 
 private:
-
+//Not quite a good solution
+	/*DynArray<UI_label*> labels;
+	DynArray<UI_image*> images;*/
+	
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 };

@@ -15,14 +15,13 @@ public:
 	void cleanUp();
 
 	// Destructor
-	~UI_label();
 };
 
-UI_label::~UI_label()
+/*UI_label::~UI_label()
 {
 	if (text != NULL)
 		delete text;
-}
+}*/
 struct UI_image : public UI_element
 {
 	SDL_Rect rect;
@@ -35,11 +34,11 @@ public:
 	//
 	void handleInput();
 	// Destructor
-	~UI_image();
+	//~UI_image();
 };
 
-UI_image::~UI_image()
+/*UI_image::~UI_image()
 {
 	if (image != NULL)
 		delete image;
-}
+}*/

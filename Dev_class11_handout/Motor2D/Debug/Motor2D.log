@@ -1,0 +1,59 @@
+﻿Compilación iniciada a las 23/11/2015 11:02:33.
+     1>Proyecto "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1FileSystem.cpp j1Fonts.cpp j1Gui.cpp j1Main.cpp j1App.cpp j1Audio.cpp j1Input.cpp j1Map.cpp j1Pathfinding.cpp j1PerfTimer.cpp j1Scene.cpp j1Timer.cpp p2Log.cpp j1Render.cpp j1Textures.cpp j1Window.cpp PugiXml\src\pugixml.cpp
+         pugixml.cpp
+         j1Window.cpp
+         j1Textures.cpp
+         j1Render.cpp
+         p2Log.cpp
+         j1Timer.cpp
+         j1Scene.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(96): warning C4244: '+=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(99): warning C4244: '-=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(102): warning C4244: '+=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(105): warning C4244: '-=' : conversión de 'float' a 'int'; posible pérdida de datos
+         j1PerfTimer.cpp
+         j1Pathfinding.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\p2point.h(114): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+                 d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\p2point.h(110) : durante la compilación de la función miembro de plantilla de clase 'int p2Point<int>::DistanceTo(const p2Point<int> &) const'
+                 d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1pathfinding.cpp(160) : vea la referencia a la creación de instancias de plantilla de función 'int p2Point<int>::DistanceTo(const p2Point<int> &) const' que se está compilando
+                 d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1pathfinding.h(81) : vea la referencia a la creación de instancias de plantilla de clase 'p2Point<int>' que se está compilando
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\p2point.h(114): warning C4244: 'return' : conversión de 'float' a 'int'; posible pérdida de datos
+         j1Map.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1map.cpp(107): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1map.cpp(108): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+         j1Input.cpp
+         j1Audio.cpp
+         j1App.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1app.cpp(223): warning C4018: '<' : no coinciden signed/unsigned
+         j1Main.cpp
+         j1Gui.cpp
+         j1Fonts.cpp
+         j1FileSystem.cpp
+         Generando código...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib" /MACHINE:X86 Debug\j1FileSystem.obj
+         Debug\j1Fonts.obj
+         Debug\j1Gui.obj
+         Debug\j1Main.obj
+         Debug\j1App.obj
+         Debug\j1Audio.obj
+         Debug\j1Input.obj
+         Debug\j1Map.obj
+         Debug\j1Pathfinding.obj
+         Debug\j1PerfTimer.obj
+         Debug\j1Scene.obj
+         Debug\j1Timer.obj
+         Debug\p2Log.obj
+         Debug\j1Render.obj
+         Debug\j1Textures.obj
+         Debug\j1Window.obj
+         Debug\pugixml.obj
+            Creando biblioteca D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib y objeto D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exp
+         Motor2D.vcxproj -> D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe
+     1>Compilación del proyecto terminada "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" (Build destinos).
+
+Compilación correcta.
+
+Tiempo transcurrido 00:00:17.14

@@ -2,7 +2,7 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
-
+#include "UI Class structure.h"
 #define CURSOR_WIDTH 2
 
 // TODO 1: Create your structure of classes
@@ -34,6 +34,11 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
+	UI_label* createLabel(char* text, int x, int y, int w, int h);
+	UI_label* createLabel(char* text, SDL_Rect rect);
+
+	UI_image* createImage(SDL_Texture* image, int x, int y,int w, int h);
+	UI_image* createImage(SDL_Texture* image, SDL_Rect rect);
 
 	const SDL_Texture* GetAtlas() const;
 

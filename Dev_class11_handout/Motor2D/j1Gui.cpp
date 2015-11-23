@@ -62,4 +62,51 @@ const SDL_Texture* j1Gui::GetAtlas() const
 }
 
 // class Gui ---------------------------------------------------
+UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
+{
+	UI_image* ret;
+	ret = new UI_image();
 
+	ret->image = image;
+	ret->rect.x = x;
+	ret->rect.y = y;
+	ret->rect.w = w;
+	ret->rect.h = h;
+
+	return ret;
+}
+UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
+{
+	UI_image* ret;
+	ret = new UI_image();
+
+	ret->image = image;
+	ret->rect = rect;
+
+	return ret;
+}
+
+UI_label* createLabel(char* text, int x, int y, int w, int h)
+{
+	UI_label* ret;
+	ret = new UI_label();
+
+	ret->text = text;
+	//Fill rect
+	ret->rect.x = x;
+	ret->rect.y = y;
+	ret->rect.w = w;
+	ret->rect.h = h;
+
+	return ret;
+}
+UI_label* createLabel(char* text, SDL_Rect rect)
+{
+	UI_label* ret;
+	ret = new UI_label();
+
+	ret->text = text;
+	ret->rect = rect;
+
+	return ret;
+}

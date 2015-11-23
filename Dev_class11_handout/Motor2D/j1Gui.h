@@ -2,7 +2,8 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
-#include "UI Class structure.h"
+#include "UI_Classes.h"
+
 #define CURSOR_WIDTH 2
 
 #include "p2DynArray.h"

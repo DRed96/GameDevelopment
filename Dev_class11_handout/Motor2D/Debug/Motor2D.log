@@ -1,19 +1,6 @@
-﻿Build started 23/11/2015 19:35:33.
+﻿Build started 23/11/2015 20:48:39.
      1>Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1App.cpp j1Gui.cpp j1Scene.cpp
-         j1App.cpp
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1app.cpp(223): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         j1Scene.cpp
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(96): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(99): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(102): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1scene.cpp(105): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-         j1Gui.cpp
-         Generating Code...
-       Link:
+     1>Link:
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib" /MACHINE:X86 Debug\j1FileSystem.obj
          Debug\j1Fonts.obj
          Debug\j1Gui.obj
@@ -31,10 +18,12 @@
          Debug\j1Textures.obj
          Debug\j1Window.obj
          Debug\pugixml.obj
+     1>j1App.obj : error LNK2005: "public: __thiscall UI_label::~UI_label(void)" (??1UI_label@@QAE@XZ) already defined in j1Gui.obj
+     1>j1Scene.obj : error LNK2005: "public: __thiscall UI_label::~UI_label(void)" (??1UI_label@@QAE@XZ) already defined in j1Gui.obj
             Creating library D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib and object D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exp
-         Motor2D.vcxproj -> D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe
-     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" (Build target(s)).
+     1>D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe : fatal error LNK1169: one or more multiply defined symbols found
+     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.63
+Time Elapsed 00:00:00.18

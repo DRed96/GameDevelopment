@@ -17,14 +17,12 @@ public:
 	void cleanUp();
 
 	// Destructor
-	~UI_label();
+	~UI_label(){
+		if (text != NULL)
+			delete text;
+	}
 };
 
-UI_label::~UI_label()
-{
-	if (text != NULL)
-		delete text;
-}
 
 struct UI_image : public UI_element
 {

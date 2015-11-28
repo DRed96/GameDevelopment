@@ -39,7 +39,7 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
-	
+	mouseState();
 	return true;
 }
 
@@ -90,7 +90,7 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	return ret;
 }*/
 
-UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h)
+UI_label* j1Gui::createLabel(char* text, int x, int y, int w , int h)
 {
 	UI_label* ret;
 	ret = new UI_label();
@@ -101,7 +101,7 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h)
 	//Fill rect
 	ret->rect.x = x;
 	ret->rect.y = y;
-	ret->rect.w = strlen(text) + 1;
+	ret->rect.w = strlen(text) * w;
 	ret->rect.h = h;
 
 	guis.add(ret);
@@ -121,26 +121,53 @@ UI_label* createLabel(char* text, SDL_Rect rect)
 }
 */
 
+/*
+Iterar la llista
+Mirar si colisionen
+Detectar quan surt i quan es queda
+Cridar a la funcio passant-li l'estat i el element de UI
+
+
+if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
+{
+char debug = '\0';
+}
+
+*/
 void j1Gui::mouseState()
 {
 	p2List_item <UI_element*>* tmp = guis.start;
-
-	bool isInside = false;
-
-	while (tmp && collided == NULL)
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
 	{
-		isInside = tmp->data->isColliding();
-		if (isInside)
-			collided = tmp,
-		tmp = tmp->next;
+		char debug = '\0';
 	}
-	if (isInside)
+	switch (current)
 	{
-		guiReviever(mouse_click, collided->data);
-		collided->data->isColliding();
-		LOG("MOUSE IS INSIDE!");
+	default:
+		while (tmp != NULL && collided == NULL)
+		{
+			//What will happen if the cursor is inside a UI element
+			if (tmp->data->isColliding())
+			{
+				collided = tmp;
+				current = mouse_enter;
+				guiReviever(current, collided->data);
+				LOG("MOUSE IS INSIDE!");
+			}
+			tmp = tmp->next;
+		}
+			
+		break;
+	case mouse_enter:
+		if (collided->data->isColliding() == false)
+		{
+			current = mouse_leave;
+			guiReviever(current, collided->data);
+			collided = NULL;
+			LOG("MOUSE IS OUTSIDE!");
+		}
+		break;
 	}
-	
 }
 /*while (tmp)
 	{

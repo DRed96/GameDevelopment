@@ -1,6 +1,8 @@
 #ifndef _UI_CLASSES_
 #define _UI_CLASSES_
-
+#include "j1App.h"
+#include "j1Render.h"
+#include "j1Input.h"
 class UI_element
 {
 public:
@@ -19,10 +21,7 @@ struct UI_label : public UI_element
 	char* text;
 	SDL_Texture* image;
 public:
-	//Inherited methods
-	void draw();
-	void update();
-	void cleanUp();
+
 };
 
 
@@ -30,10 +29,7 @@ struct UI_image : public UI_element
 {
 	SDL_Texture* image;
 public:
-	//Inherited methods
-	void draw();
-	void update();
-	void cleanUp();
+
 
 	void handleInput();
 };

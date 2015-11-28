@@ -1,34 +1,30 @@
-﻿Build started 28/11/2015 16:00:19.
+﻿Build started 28/11/2015 23:53:51.
      1>Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt UI_Classes.cpp j1Gui.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1Gui.cpp
          j1Gui.cpp
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1gui.cpp(51): error C2059: syntax error : ')'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\j1gui.cpp(118): error C2146: syntax error : missing ';' before identifier 'guis'
-         UI_Classes.cpp
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(11): error C2146: syntax error : missing ';' before identifier 'rect'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(20): error C2143: syntax error : missing ';' before '*'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(31): error C2143: syntax error : missing ';' before '*'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(15): error C2065: 'tmp' : undeclared identifier
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2065: 'tmp' : undeclared identifier
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2227: left of '->data' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2227: left of '->rect' must point to class/struct/union/generic type
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2228: left of '.x' must have class/struct/union
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2065: 'rect' : undeclared identifier
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(17): error C2228: left of '.w' must have class/struct/union
-                 type is 'unknown-type'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(18): error C2065: 'tmp' : undeclared identifier
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(18): error C2227: left of '->next' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(20): error C2562: 'UI_element::isColliding' : 'void' function returning a value
-                 d:\users\david\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.h(7) : see declaration of 'UI_element::isColliding'
-         Generating Code...
-     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" (Build target(s)) -- FAILED.
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib" /MACHINE:X86 Debug\j1FileSystem.obj
+         Debug\j1Fonts.obj
+         Debug\j1Gui.obj
+         Debug\j1Main.obj
+         Debug\j1App.obj
+         Debug\j1Audio.obj
+         Debug\j1Input.obj
+         Debug\j1Map.obj
+         Debug\j1Pathfinding.obj
+         Debug\j1PerfTimer.obj
+         Debug\j1Scene.obj
+         Debug\j1Timer.obj
+         Debug\p2Log.obj
+         Debug\j1Render.obj
+         Debug\j1Textures.obj
+         Debug\j1Window.obj
+         Debug\pugixml.obj
+         Debug\UI_Classes.obj
+         Motor2D.vcxproj -> D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe
+     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:01.02
+Time Elapsed 00:00:01.06

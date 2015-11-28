@@ -92,6 +92,7 @@
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="UI_Classes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1FileSystem.h" />

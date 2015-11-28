@@ -32,50 +32,14 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	current = mouse_idle;
+	collided = NULL;
 	return true;
 }
 
 // Update all guis
 bool j1Gui::PreUpdate()
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	p2List_item <UI_element*>* tmp = guis.start;
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
-	{
-		char debug = '\0';
-	}
-	while (tmp)
-	{
-		switch (current)
-		{
-		
-		case mouse_enter:
-			if (x < tmp->data->rect.x || x > tmp->data->rect.x + tmp->data->rect.w
-				|| y < tmp->data->rect.y || y > tmp->data->rect.y + tmp->data->rect.h)
-			{
-				if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-					{
-						guiReviever(mouse_click, tmp->data);
-					}
-					current = mouse_leave;
-					guiReviever(current, tmp->data);
-					LOG("MOUSE IS GONE!");
-				}
-			break;
-		
-		default:
-			if (x > tmp->data->rect.x && x < tmp->data->rect.x + tmp->data->rect.w 
-				&& y > tmp->data->rect.y && y < tmp->data->rect.y + tmp->data->rect.h)
-			{
-				current = mouse_enter;
-				guiReviever(current, tmp->data);
-				LOG("MOUSE IS INSIDE!");
-			}
-			break;
-		}
-		tmp = tmp->next;
-	}
+	
 	return true;
 }
 
@@ -89,8 +53,7 @@ bool j1Gui::PostUpdate()
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-	/*images.del();
-	labels.del();*/
+	guis.clear();
 	return true;
 }
 
@@ -157,3 +120,56 @@ UI_label* createLabel(char* text, SDL_Rect rect)
 	return ret;
 }
 */
+
+void j1Gui::mouseState()
+{
+	p2List_item <UI_element*>* tmp = guis.start;
+
+	bool isInside = false;
+
+	while (tmp && collided == NULL)
+	{
+		isInside = tmp->data->isColliding();
+		if (isInside)
+			collided = tmp,
+		tmp = tmp->next;
+	}
+	if (isInside)
+	{
+		guiReviever(mouse_click, collided->data);
+		collided->data->isColliding();
+		LOG("MOUSE IS INSIDE!");
+	}
+	
+}
+/*while (tmp)
+	{
+		switch (current)
+		{
+		case mouse_enter:
+			if (x < tmp->data->rect.x || x > tmp->data->rect.x + tmp->data->rect.w
+				|| y < tmp->data->rect.y || y > tmp->data->rect.y + tmp->data->rect.h)
+			{
+				if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+					{
+						guiReviever(mouse_click, tmp->data);
+						LOG("CLICKED!");
+					}
+					current = mouse_leave;
+					guiReviever(current, tmp->data);
+					LOG("MOUSE IS GONE!");
+			}
+			break;
+		
+		default:
+			if (x > tmp->data->rect.x && x < tmp->data->rect.x + tmp->data->rect.w 
+				&& y > tmp->data->rect.y && y < tmp->data->rect.y + tmp->data->rect.h)
+			{
+				current = mouse_enter;
+				guiReviever(current, tmp->data);
+				LOG("MOUSE IS INSIDE!");
+			}
+			break;
+		}
+		tmp = tmp->next;
+		}*/

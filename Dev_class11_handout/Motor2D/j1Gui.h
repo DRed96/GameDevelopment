@@ -44,10 +44,14 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
+	void mouseState();
+
 private:
 //Not quite a good solution
 	p2List<UI_element*> guis;
 	gui_events current;
+
+	p2List_item <UI_element*>* collided;
 
 	j1KeyState mouse_state;
 	SDL_Texture* atlas;

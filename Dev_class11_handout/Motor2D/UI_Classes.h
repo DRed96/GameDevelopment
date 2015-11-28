@@ -1,15 +1,18 @@
 #ifndef _UI_CLASSES_
 #define _UI_CLASSES_
 
-
-
 class UI_element
 {
+public:
+	bool isColliding();
 public:
 	int id;
 	int listener;
 	SDL_Rect rect;
+	bool inside;
+	bool focus;
 };
+
 
 struct UI_label : public UI_element
 {

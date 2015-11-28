@@ -13,7 +13,6 @@ public:
 
 struct UI_label : public UI_element
 {
-	
 	char* text;
 	SDL_Texture* image;
 public:
@@ -32,9 +31,8 @@ public:
 	void draw();
 	void update();
 	void cleanUp();
-	//
+
 	void handleInput();
-	
 };
 
 #endif // !_UI_CLASSES_

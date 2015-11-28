@@ -46,7 +46,7 @@ bool j1Scene::Start()
 	SDL_Texture* bannerTex = App->tex->Load("gui/atlas.png");
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	banner = App->gui->createImage(bannerTex, 612 - 328, 50, 328, 103);
-
+	text = App->gui->createLabel("Hello world", 612, 0, 328, 103);
 	return true;
 }
 
@@ -137,6 +137,7 @@ bool j1Scene::Update(float dt)
 
 	SDL_Rect rect{ 485, 829, 328, 103 };
 	App->render->Blit(banner->image, banner->rect.x - App->render->camera.x, banner->rect.y - App->render->camera.y, &rect);
+	App->render->Blit(text->image, text->rect.x - App->render->camera.x, text->rect.y - App->render->camera.y);
 	return true;
 }
 

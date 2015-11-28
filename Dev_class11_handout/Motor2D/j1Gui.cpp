@@ -54,16 +54,14 @@ bool j1Gui::PreUpdate()
 			if (x < tmp->data->rect.x || x > tmp->data->rect.x + tmp->data->rect.w
 				|| y < tmp->data->rect.y || y > tmp->data->rect.y + tmp->data->rect.h)
 			{
-				
-					if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+				if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 					{
 						guiReviever(mouse_click, tmp->data);
 					}
 					current = mouse_leave;
 					guiReviever(current, tmp->data);
 					LOG("MOUSE IS GONE!");
-	
-			}
+				}
 			break;
 		
 		default:
@@ -129,21 +127,23 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	return ret;
 }*/
 
-UI_label* createLabel(char* text, int x, int y, int w, int h)
+UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h)
 {
 	UI_label* ret;
 	ret = new UI_label();
 
 	ret->text = text;
+	ret->image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 	//Fill rect
 	ret->rect.x = x;
 	ret->rect.y = y;
 	ret->rect.w = w;
 	ret->rect.h = h;
 
-	//images.Add(ret);
+	guis.add(ret);
 	return ret;
 }
+/*
 UI_label* createLabel(char* text, SDL_Rect rect)
 {
 	UI_label* ret;
@@ -155,3 +155,4 @@ UI_label* createLabel(char* text, SDL_Rect rect)
 	//images.Add(ret);
 	return ret;
 }
+*/

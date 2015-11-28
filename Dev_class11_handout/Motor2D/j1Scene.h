@@ -38,6 +38,7 @@ private:
 	SDL_Texture* debug_tex;
 	UI_image* banner;
 	UI_label* text;
+	p2Point<uint> screenSize;
 };
 
 #endif // __j1SCENE_H__

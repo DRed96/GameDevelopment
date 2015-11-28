@@ -36,7 +36,7 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	UI_label* createLabel(char* text, int x, int y, int w, int h);
+	UI_label* createLabel(char* text, int x, int y, int w = 0, int h = 1);
 //	UI_label* createLabel(char* text, SDL_Rect rect);
 
 	UI_image* createImage(SDL_Texture* image, int x, int y,int w, int h);

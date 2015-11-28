@@ -32,6 +32,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	App->win->GetWindowSize(screenSize.x, screenSize.y);
 	if(App->map->Load("iso_walk.tmx") == true)
 	{
 		int w, h;
@@ -45,8 +46,8 @@ bool j1Scene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 	SDL_Texture* bannerTex = App->tex->Load("gui/atlas.png");
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
-	banner = App->gui->createImage(bannerTex, 612 - 328, 50, 328, 103);
-	text = App->gui->createLabel("Hello world", 612, 0, 328, 103);
+	banner = App->gui->createImage(bannerTex, screenSize.x/2 - 328/2, 50, 328, 103);
+	text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
 	return true;
 }
 

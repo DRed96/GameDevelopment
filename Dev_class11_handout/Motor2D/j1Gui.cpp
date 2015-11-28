@@ -134,10 +134,11 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h)
 
 	ret->text = text;
 	ret->image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+	
 	//Fill rect
 	ret->rect.x = x;
 	ret->rect.y = y;
-	ret->rect.w = w;
+	ret->rect.w = strlen(text) + 1;
 	ret->rect.h = h;
 
 	guis.add(ret);

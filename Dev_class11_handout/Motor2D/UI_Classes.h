@@ -1,32 +1,31 @@
 #ifndef _UI_CLASSES_
 #define _UI_CLASSES_
+
+
+
 class UI_element
 {
+public:
 	int id;
+	int listener;
+	SDL_Rect rect;
 };
 
 struct UI_label : public UI_element
 {
-	SDL_Rect rect;
+	
 	char* text;
-
+	SDL_Texture* image;
 public:
 	//Inherited methods
 	void draw();
 	void update();
 	void cleanUp();
-
-	// Destructor
-	~UI_label(){
-		if (text != NULL)
-			delete text;
-	}
 };
 
 
 struct UI_image : public UI_element
 {
-	SDL_Rect rect;
 	SDL_Texture* image;
 public:
 	//Inherited methods
@@ -35,12 +34,7 @@ public:
 	void cleanUp();
 	//
 	void handleInput();
-	// Destructor
-	~UI_image()
-	{
-		if (image != NULL)
-			delete image;
-	}
+	
 };
 
 #endif // !_UI_CLASSES_

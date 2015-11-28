@@ -40,15 +40,16 @@ public:
 	UI_label* createLabel(char* text, SDL_Rect rect);
 
 	UI_image* createImage(SDL_Texture* image, int x, int y,int w, int h);
-	UI_image* createImage(SDL_Texture* image, SDL_Rect rect);
+//	UI_image* createImage(SDL_Texture* image, SDL_Rect rect);
 
 	const SDL_Texture* GetAtlas() const;
 
 private:
 //Not quite a good solution
-	/*DynArray<UI_label*> labels;
-	DynArray<UI_image*> images;*/
-	
+	p2List<UI_element*> guis;
+	gui_events current;
+
+	j1KeyState mouse_state;
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 };

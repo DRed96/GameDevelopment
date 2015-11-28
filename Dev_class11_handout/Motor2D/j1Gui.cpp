@@ -31,13 +31,53 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
-
+	current = mouse_idle;
 	return true;
 }
 
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	p2List_item <UI_element*>* tmp = guis.start;
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
+	{
+		char debug = '\0';
+	}
+	while (tmp)
+	{
+		switch (current)
+		{
+		
+		case mouse_enter:
+			if (x < tmp->data->rect.x || x > tmp->data->rect.x + tmp->data->rect.w
+				|| y < tmp->data->rect.y || y > tmp->data->rect.y + tmp->data->rect.h)
+			{
+				
+					if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+					{
+						guiReviever(mouse_click, tmp->data);
+					}
+					current = mouse_leave;
+					guiReviever(current, tmp->data);
+					LOG("MOUSE IS GONE!");
+	
+			}
+			break;
+		
+		default:
+			if (x > tmp->data->rect.x && x < tmp->data->rect.x + tmp->data->rect.w 
+				&& y > tmp->data->rect.y && y < tmp->data->rect.y + tmp->data->rect.h)
+			{
+				current = mouse_enter;
+				guiReviever(current, tmp->data);
+				LOG("MOUSE IS INSIDE!");
+			}
+			break;
+		}
+		tmp = tmp->next;
+	}
 	return true;
 }
 
@@ -74,10 +114,10 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	ret->rect.w = w;
 	ret->rect.h = h;
 	
-//	labels.Add(ret);
+	guis.add(ret);
 	return ret;
 }
-UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
+/*UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
 {
 	UI_image* ret;
 	ret = new UI_image();
@@ -87,7 +127,7 @@ UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
 	
 	//labels.Add(ret);
 	return ret;
-}
+}*/
 
 UI_label* createLabel(char* text, int x, int y, int w, int h)
 {

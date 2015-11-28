@@ -3,10 +3,12 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
+
 class UI_element
 {
 public:
 	bool isColliding();
+	bool isClicking();
 public:
 	int id;
 	int listener;
@@ -29,9 +31,6 @@ struct UI_image : public UI_element
 {
 	SDL_Texture* image;
 public:
-
-
-	void handleInput();
 };
 
 #endif // !_UI_CLASSES_

@@ -158,6 +158,15 @@ void j1Gui::mouseState()
 		}
 			
 		break;
+	case mouse_click:
+		if (collided->data->isClicking() == false)
+		{
+			current = mouse_unclick;
+			guiReviever(current, collided->data);
+			LOG("MOUSE IS UNCLICKED!");
+		}
+	case mouse_unclick:
+
 	case mouse_enter:
 		if (collided->data->isColliding() == false)
 		{
@@ -165,6 +174,15 @@ void j1Gui::mouseState()
 			guiReviever(current, collided->data);
 			collided = NULL;
 			LOG("MOUSE IS OUTSIDE!");
+		}
+		else
+		{
+			if (collided->data->isClicking() == true)
+			{
+				current = mouse_click;
+				guiReviever(current, collided->data);
+				LOG("MOUSE IS CLICKED!");
+			}
 		}
 		break;
 	}

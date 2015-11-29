@@ -45,13 +45,17 @@ bool j1Scene::Start()
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	debug_tex = App->tex->Load("maps/path2.png");
 	SDL_Texture* bannerTex = App->tex->Load("gui/atlas.png");
-	banner = App->gui->createImage(bannerTex, { 642, 169, 229, 69 });
+	SDL_Rect rect1 = { (screenSize.x / 2 - 328 / 2), 50, 328, 103 };
+	SDL_Rect Trect2 = { 642, 169, 229, 69 };
+	SDL_Rect Trect3 = { 0, 113, 229, 69 };
+	SDL_Rect Trect4 = { 411, 169, 229, 69 };
+	banner = App->gui->createImage(bannerTex, &rect1, &Trect2, &Trect3, &Trect4);
 
 	/*banner = App->gui->createImage(bannerTex, { 642, 169, 229, 69 });
 	banner = App->gui->createImage(bannerTex, { 0, 113, 229, 69 });
 	banner = App->gui->createImage(bannerTex, { 411, 169, 229, 69 });*/
 
-	text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
+	//text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
 	return true;
 }
 
@@ -139,10 +143,10 @@ bool j1Scene::Update(float dt)
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
-
+	
 	/*App->render->Blit(banner->idle_image, (screenSize.x / 2 - 328 / 2) - App->render->camera.x, 50 - App->render->camera.y, &banner->rect);
 	App->render->Blit(text->idle_image, text->rect.x - App->render->camera.x, text->rect.y - App->render->camera.y);*/
-	App->gui->render((screenSize.x / 2 - 328 / 2) - App->render->camera.x, 50 - App->render->camera.y);
+	App->gui->render();
 	return true;
 }
 

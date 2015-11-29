@@ -1,7 +1,7 @@
 #include "UI_Classes.h"
 
 //General methods-------------
-void UI_element::draw(int x, int y, img_state state) const
+void UI_element::draw(img_state state) const
 {
 	return;
 }
@@ -13,7 +13,7 @@ bool UI_element :: isColliding() const
 	App->input->GetMousePosition(m_x,m_y);
 
 	//Check if it is inside the rect
-	if (m_x > rect.x && m_x < (rect.x + rect.w) && m_y > rect.y && m_y < (rect.y + rect.h))
+	if (m_x > rect->x && m_x < (rect->x + rect->w) && m_y > rect->y && m_y < (rect->y + rect->h))
 	{
 		ret = true;
 	}
@@ -45,33 +45,42 @@ ui_types UI_element::getType() const
 
 //Image Methods----------------
 
-UI_image::UI_image() : idle_image(NULL), hover_image(NULL), clicked_image(NULL)
+UI_image::UI_image() : texture(NULL), idle_rect(NULL), hover_rect(NULL), clicked_rect(NULL)
 {
 	type = T_image;
 }
 
-//Render
-void UI_image::draw(int x, int y, img_state state) const
+UI_image::~UI_image()
 {
-	SDL_Texture*  currentTex = idle_image;
+	//Release all rects
+	RELEASE(idle_rect);
+	RELEASE(hover_rect);
+	RELEASE(clicked_rect);
+	//Release Texture
+	RELEASE(texture);
+}
+//Render
+void UI_image::draw( img_state state) const
+{
+	SDL_Rect* texture_rect = idle_rect;
 	switch (state)
 	{
 	case hover_state:
-		currentTex = hover_image;
+		texture_rect = hover_rect;
 		break;
 	case click_state:
-		currentTex = clicked_image;
+		texture_rect = clicked_rect;
 		break;
 	}
-	App->render->Blit(currentTex, x, y, &rect);
+	App->render->Blit(idle_image, rect->x, rect->y, texture_rect);
 }
 
 //Label Methods----------------
 
 UI_label::UI_label() : idle_text(NULL), hover_text(NULL), clicked_text(NULL)
 {
-	idle_image = NULL;
+	/*idle_image = NULL;
 	hover_image = NULL; 
-	clicked_image = NULL;
+	clicked_image = NULL;*/
 	type = T_label;
 }

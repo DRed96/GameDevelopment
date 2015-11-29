@@ -29,22 +29,27 @@ public:
 	//Type Getter
 	ui_types getType() const;
 	//Render
-	virtual void draw(int x, int y, img_state state) const;
+	virtual void draw( img_state state) const;
 public:
 	int id;
-	SDL_Rect rect;
-	
+	//Rects
+	SDL_Rect* rect;
 };
 
 struct UI_image : public UI_element
 {
-	SDL_Texture* idle_image;
-	SDL_Texture* hover_image;
-	SDL_Texture* clicked_image;
+	SDL_Texture* texture;
+	
+	//Textures
+	SDL_Rect* idle_rect;
+	SDL_Rect* hover_rect;
+	SDL_Rect* clicked_rect;
+	
 public:
 	UI_image();
+	~UI_image();
 	//Render
-	void draw(int x, int y, img_state state) const;
+	void draw(img_state state) const;
 };
 
 
@@ -55,7 +60,7 @@ struct UI_label : public UI_image
 	char* clicked_text;
 public:
 	UI_label();
-
+	~UI_label();
 
 };
 #endif // !_UI_CLASSES_

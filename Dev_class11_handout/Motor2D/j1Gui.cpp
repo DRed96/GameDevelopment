@@ -65,13 +65,13 @@ const SDL_Texture* j1Gui::GetAtlas() const
 }
 
 //Render
-void j1Gui::render(int x, int y) const
+void j1Gui::render() const
 {
 	p2List_item <UI_element*>* tmp = guis.start;
 	img_state state = idle_state;
 	while (tmp != NULL)
 	{
-	//	if (tmp == collided)
+		//if (tmp == collided)
 		
 		switch (current)
 		{
@@ -81,10 +81,8 @@ void j1Gui::render(int x, int y) const
 		case mouse_click:
 			state = click_state;
 				break;
-		
-		
 		}
-		tmp->data->draw(x, y, state);
+		tmp->data->draw(state);
 		tmp = tmp->next;
 	}
 	
@@ -101,21 +99,24 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	
 	ret->idle_image = image;
 	
-	ret->rect.x = x;
-	ret->rect.y = y;
-	ret->rect.w = w;
-	ret->rect.h = h;
+	ret->rect->x = x;
+	ret->rect->y = y;
+	ret->rect->w = w;
+	ret->rect->h = h;
 	
 	guis.add(ret);
 	return ret;
 }
-UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect rect)
+UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect* _rect, SDL_Rect* _texture_rect)
 {
 	UI_image* ret;
 	ret = new UI_image();
 
 	ret->idle_image = image;	
-	ret->rect = rect;
+	ret->rect = new SDL_Rect(*_rect);
+	ret->idle_rect = new SDL_Rect(*_texture_rect);
+	/*ret->hover_rect = new SDL_Rect(*_hover_rect);
+	ret->clicked_rect = new SDL_Rect(*_click_rect);*/
 	//labels.Add(ret);
 	guis.add(ret);
 	return ret;
@@ -127,7 +128,7 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h, img_state t
 	UI_label* ret;
 	ret = new UI_label();
 
-	switch (type)
+	/*switch (type)
 	{
 	case idle_state:
 		ret->idle_text = text;
@@ -141,22 +142,22 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h, img_state t
 		ret->clicked_text = text;
 		ret->clicked_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 		break;
-	}
+	}*/
 	//Fill rect
-	ret->rect.x = x;
-	ret->rect.y = y;
-	ret->rect.w = strlen(text) * w;
-	ret->rect.h = h;
+	ret->rect->x = x;
+	ret->rect->y = y;
+	ret->rect->w = strlen(text) * w;
+	ret->rect->h = h;
 
 	guis.add(ret);
 	return ret;
 }
 //Unrecomended method vvvvvvv
-UI_label* j1Gui::createLabel(char* text, SDL_Rect rect, img_state type)
+UI_label* j1Gui::createLabel(char* text, SDL_Rect* rect, img_state type)
 {
 	UI_label* ret;
 	ret = new UI_label();
-
+	/*
 	switch (type)
 	{
 	case idle_state:
@@ -171,7 +172,7 @@ UI_label* j1Gui::createLabel(char* text, SDL_Rect rect, img_state type)
 		ret->clicked_text = text;
 		ret->clicked_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 		break;
-	}
+	}*/
 
 	ret->rect = rect;
 	guis.add(ret);

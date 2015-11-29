@@ -28,32 +28,40 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	//Render
+	void render(int x, int y) const;
+
 	// Called after all Updates
 	bool PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();
 
-	// TODO 2: Create the factory methods
 	// Gui creation functions
-	UI_label* createLabel(char* text, int x, int y, int w = 12, int h = 12);
-//	UI_label* createLabel(char* text, SDL_Rect rect);
+	//They create a basic UI_image with a single texture
+	UI_image* createImage(SDL_Texture* image, int x, int y, int w, int h);
+	UI_image* createImage(SDL_Texture* image, SDL_Rect rect);
 
-	UI_image* createImage(SDL_Texture* image, int x, int y,int w, int h);
-//	UI_image* createImage(SDL_Texture* image, SDL_Rect rect);
-
-	const SDL_Texture* GetAtlas() const;
-
+	UI_label* createLabel(char* text, int x, int y, int w = 12, int h = 12, img_state type = idle_state);//12 is the standard typo size
+	//Unrecomended method vvvvvvv
+	UI_label* createLabel(char* text, SDL_Rect rect, img_state type = idle_state);
+		
 	void mouseState();
 
-private:
-//Not quite a good solution
-	p2List<UI_element*> guis;
-	gui_events current;
+	void guiReviever(gui_events g_event, UI_element * element);
+	const SDL_Texture* GetAtlas() const;
 
+
+
+private:
+	//All the list of UI elements
+	p2List<UI_element*> guis;
+	//Saves the current event
+	gui_events current;
+	//Saves the UI element in witch the button is
 	p2List_item <UI_element*>* collided;
 
-	j1KeyState mouse_state;
+	//j1KeyState mouse_state;
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 };

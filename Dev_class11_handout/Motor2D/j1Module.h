@@ -17,7 +17,8 @@ enum gui_events
 	mouse_enter,
 	mouse_leave,
 	mouse_click,
-	mouse_unclick
+	mouse_unclick,
+	mouse_drag
 };
 
 class j1App;

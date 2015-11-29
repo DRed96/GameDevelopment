@@ -33,6 +33,7 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	current = mouse_idle;
 	collided = NULL;
+
 	return true;
 }
 
@@ -63,13 +64,43 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
+//Render
+void j1Gui::render(int x, int y) const
+{
+	p2List_item <UI_element*>* tmp = guis.start;
+	img_state state = idle_state;
+	while (tmp != NULL)
+	{
+	//	if (tmp == collided)
+		
+		switch (current)
+		{
+		case mouse_enter:
+			state = hover_state;
+				break;
+		case mouse_click:
+			state = click_state;
+				break;
+		
+		
+		}
+		tmp->data->draw(x, y, state);
+		tmp = tmp->next;
+	}
+	
+}
+
 // class Gui ---------------------------------------------------
+
+//Image factory methods
 UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 {
 	UI_image* ret;
 	ret = new UI_image();
 
-	ret->image = image;
+	
+	ret->idle_image = image;
+	
 	ret->rect.x = x;
 	ret->rect.y = y;
 	ret->rect.w = w;
@@ -78,26 +109,39 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	guis.add(ret);
 	return ret;
 }
-/*UI_image* createImage(SDL_Texture* image, SDL_Rect rect)
+UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect rect)
 {
 	UI_image* ret;
 	ret = new UI_image();
 
-	ret->image = image;
+	ret->idle_image = image;	
 	ret->rect = rect;
-	
 	//labels.Add(ret);
+	guis.add(ret);
 	return ret;
-}*/
+}
 
-UI_label* j1Gui::createLabel(char* text, int x, int y, int w , int h)
+//Label factory methods
+UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h, img_state type)
 {
 	UI_label* ret;
 	ret = new UI_label();
 
-	ret->text = text;
-	ret->image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
-	
+	switch (type)
+	{
+	case idle_state:
+		ret->idle_text = text;
+		ret->idle_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	case hover_state:
+		ret->hover_text = text;
+		ret->hover_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	case click_state:
+		ret->clicked_text = text;
+		ret->clicked_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	}
 	//Fill rect
 	ret->rect.x = x;
 	ret->rect.y = y;
@@ -107,33 +151,35 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w , int h)
 	guis.add(ret);
 	return ret;
 }
-/*
-UI_label* createLabel(char* text, SDL_Rect rect)
+//Unrecomended method vvvvvvv
+UI_label* j1Gui::createLabel(char* text, SDL_Rect rect, img_state type)
 {
 	UI_label* ret;
 	ret = new UI_label();
 
-	ret->text = text;
-	ret->rect = rect;
+	switch (type)
+	{
+	case idle_state:
+		ret->idle_text = text;
+		ret->idle_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	case hover_state:
+		ret->hover_text = text;
+		ret->hover_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	case click_state:
+		ret->clicked_text = text;
+		ret->clicked_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		break;
+	}
 
-	//images.Add(ret);
+	ret->rect = rect;
+	guis.add(ret);
 	return ret;
 }
-*/
-
-/*
-Iterar la llista
-Mirar si colisionen
-Detectar quan surt i quan es queda
-Cridar a la funcio passant-li l'estat i el element de UI
 
 
-if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
-{
-char debug = '\0';
-}
 
-*/
 void j1Gui::mouseState()
 {
 	p2List_item <UI_element*>* tmp = guis.start;
@@ -158,16 +204,37 @@ void j1Gui::mouseState()
 		}
 			
 		break;
+	case mouse_drag:
+		if (collided->data->isClicking() == true)
+		{
+			collided->data->dragging();
+		}
+		else
+		{
+			current = mouse_idle;
+			collided = NULL;
+			LOG("MOUSE HAS STOPPED DRAGGING");
+		}
+		break;
 	case mouse_click:
 		if (collided->data->isClicking() == false)
 		{
-			current = mouse_unclick;
+			current = mouse_enter;
 			guiReviever(current, collided->data);
 			LOG("MOUSE IS UNCLICKED!");
 		}
-	case mouse_unclick:
-
+		else
+		{
+			if (collided->data->isColliding() == false)
+			{
+				current = mouse_drag;
+				guiReviever(current, collided->data);
+				LOG("MOUSE IS DRAGGING!");
+			}
+		}
+		break;
 	case mouse_enter:
+	
 		if (collided->data->isColliding() == false)
 		{
 			current = mouse_leave;
@@ -185,36 +252,25 @@ void j1Gui::mouseState()
 			}
 		}
 		break;
+
 	}
 }
-/*while (tmp)
+
+//We use various switches in case the function depends on the type of the UI element
+void  j1Gui::guiReviever(gui_events g_event, UI_element * element)
+{
+	ui_types type = element->getType();
+	//Is this correct?
+	switch (type)
 	{
-		switch (current)
-		{
-		case mouse_enter:
-			if (x < tmp->data->rect.x || x > tmp->data->rect.x + tmp->data->rect.w
-				|| y < tmp->data->rect.y || y > tmp->data->rect.y + tmp->data->rect.h)
+		case T_image:
+			UI_image* ptr = (UI_image*)element;
+			switch (g_event)
 			{
-				if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-					{
-						guiReviever(mouse_click, tmp->data);
-						LOG("CLICKED!");
-					}
-					current = mouse_leave;
-					guiReviever(current, tmp->data);
-					LOG("MOUSE IS GONE!");
+			case mouse_click:
+			//	ptr->image =
+				break;
 			}
-			break;
-		
-		default:
-			if (x > tmp->data->rect.x && x < tmp->data->rect.x + tmp->data->rect.w 
-				&& y > tmp->data->rect.y && y < tmp->data->rect.y + tmp->data->rect.h)
-			{
-				current = mouse_enter;
-				guiReviever(current, tmp->data);
-				LOG("MOUSE IS INSIDE!");
-			}
-			break;
-		}
-		tmp = tmp->next;
-		}*/
+		break;
+	}
+}

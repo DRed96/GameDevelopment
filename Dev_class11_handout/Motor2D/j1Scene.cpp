@@ -56,8 +56,8 @@ bool j1Scene::Start()
 	banner->addClickedRect(411, 169, 229, 69);
 
 	text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
-	text = App->gui->createLabel("Hovering", screenSize.x / 2 - 20, 34,hover_state);
-	text = App->gui->createLabel("Clicking", screenSize.x / 2 - 20, 34, click_state);
+	text->addHoverText("Hovering");
+	text->addClickedText("Clicking");
 	return true;
 }
 
@@ -148,6 +148,8 @@ bool j1Scene::Update(float dt)
 	
 	/*App->render->Blit(banner->idle_image, (screenSize.x / 2 - 328 / 2) - App->render->camera.x, 50 - App->render->camera.y, &banner->rect);
 	App->render->Blit(text->idle_image, text->rect.x - App->render->camera.x, text->rect.y - App->render->camera.y);*/
+	
+	//Render all gui elements
 	App->gui->render();
 	return true;
 }

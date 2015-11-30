@@ -1,8 +1,10 @@
-﻿Compilación iniciada a las 30/11/2015 08:33:11.
+﻿Compilación iniciada a las 30/11/2015 08:47:19.
      1>Proyecto "D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Motor2D\Motor2D.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1Gui.cpp
-         j1Gui.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt UI_Classes.cpp
+         UI_Classes.cpp
+     1>d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\ui_classes.cpp(60): warning C4150: eliminación de puntero a tipo 'SDL_Texture' incompleto; no se ha llamado a un destructor
+                 d:\users\davidrc17\documents\github\gamedevelopment\dev_class11_handout\motor2d\sdl\include\sdl_render.h(127) : vea la declaración de 'SDL_Texture'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\davidrc17\Documents\GitHub\GameDevelopment\Dev_class11_handout\Debug\Development - Class 11.lib" /MACHINE:X86 Debug\j1FileSystem.obj
          Debug\j1Fonts.obj
@@ -27,4 +29,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.68
+Tiempo transcurrido 00:00:01.18

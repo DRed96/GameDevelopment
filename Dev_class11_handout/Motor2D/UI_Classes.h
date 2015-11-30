@@ -3,7 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
-
+#include "j1Fonts.h"
 enum ui_types
 {
 	T_label,
@@ -59,16 +59,26 @@ public:
 
 struct UI_label : public UI_element
 {
+	//Text strings
 	char* idle_text;
 	char* hover_text;
 	char* clicked_text;
 
+	//A texture for every text
 	SDL_Texture* idle_texture;
 	SDL_Texture* hover_texture;
 	SDL_Texture* clicked_texture;
+
+	//Render
+	void draw(img_state state) const;
 public:
 	UI_label();
 	~UI_label();
+
+	//Add Optional Text Textures
+	void addHoverText(char* _text);
+
+	void addClickedText(char* _text);
 
 };
 #endif // !_UI_CLASSES_

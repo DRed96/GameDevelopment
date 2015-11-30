@@ -107,3 +107,35 @@ UI_label::UI_label() : idle_text(NULL), hover_text(NULL), clicked_text(NULL)
 	clicked_image = NULL;*/
 	type = T_label;
 }
+
+//Render
+void UI_label::draw(img_state state) const
+{
+	SDL_Texture* current_t = idle_texture;
+	switch (state)
+	{
+	case hover_state:
+		if (hover_texture)
+			current_t = hover_texture;
+		break;
+	case click_state:
+		if (clicked_texture)
+			current_t = clicked_texture;
+		break;
+	}
+	App->render->Blit(current_t, rect->x, rect->y);
+}
+
+
+//Add Optional Text Textures
+void UI_label::addHoverText(char* _text)
+{
+	hover_text = _text;
+	hover_texture =  App->font->Print(_text, { 255, 255, 255, 255 }, App->font->default);
+}
+
+void UI_label::addClickedText(char* _text)
+{
+	clicked_text = _text;
+	clicked_texture = App->font->Print(_text, { 255, 255, 255, 255 }, App->font->default);
+}

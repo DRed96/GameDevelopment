@@ -45,17 +45,19 @@ bool j1Scene::Start()
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	debug_tex = App->tex->Load("maps/path2.png");
 	SDL_Texture* bannerTex = App->tex->Load("gui/atlas.png");
+
 	SDL_Rect rect1 = { (screenSize.x / 2 - 328 / 2), 50, 328, 103 };
 	SDL_Rect Trect2 = { 642, 169, 229, 69 };
-	SDL_Rect Trect3 = { 0, 113, 229, 69 };
-	SDL_Rect Trect4 = { 411, 169, 229, 69 };
-	banner = App->gui->createImage(bannerTex, &rect1, &Trect2, &Trect3, &Trect4);
+//	SDL_Rect Trect3 = { 0, 113, 229, 69 };
+//	SDL_Rect Trect4 = { 411, 169, 229, 69 };
 
-	/*banner = App->gui->createImage(bannerTex, { 642, 169, 229, 69 });
-	banner = App->gui->createImage(bannerTex, { 0, 113, 229, 69 });
-	banner = App->gui->createImage(bannerTex, { 411, 169, 229, 69 });*/
+	banner = App->gui->createImage(bannerTex, &rect1, &Trect2);
+	banner->addHoverRect(0, 113, 229, 69);
+	banner->addClickedRect(411, 169, 229, 69);
 
-	//text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
+	text = App->gui->createLabel("Hello world", screenSize.x/2 - 20, 34);
+	text = App->gui->createLabel("Hovering", screenSize.x / 2 - 20, 34,hover_state);
+	text = App->gui->createLabel("Clicking", screenSize.x / 2 - 20, 34, click_state);
 	return true;
 }
 

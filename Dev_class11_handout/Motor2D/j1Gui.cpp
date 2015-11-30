@@ -97,7 +97,7 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	ret = new UI_image();
 
 	
-	ret->idle_image = image;
+	ret->texture = image;
 	
 	ret->rect->x = x;
 	ret->rect->y = y;
@@ -107,12 +107,12 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	guis.add(ret);
 	return ret;
 }
-UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect* _rect, SDL_Rect* _texture_rect)
+UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect* _rect, SDL_Rect* _texture_rect, SDL_Rect* _hover_rect, SDL_Rect* _click_rect)
 {
 	UI_image* ret;
 	ret = new UI_image();
 
-	ret->idle_image = image;	
+	ret->texture = image;
 	ret->rect = new SDL_Rect(*_rect);
 	ret->idle_rect = new SDL_Rect(*_texture_rect);
 	/*ret->hover_rect = new SDL_Rect(*_hover_rect);
@@ -128,22 +128,24 @@ UI_label* j1Gui::createLabel(char* text, int x, int y, int w, int h, img_state t
 	UI_label* ret;
 	ret = new UI_label();
 
-	/*switch (type)
+	switch (type)
 	{
 	case idle_state:
 		ret->idle_text = text;
-		ret->idle_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		ret->idle_texture = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 		break;
 	case hover_state:
 		ret->hover_text = text;
-		ret->hover_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		ret->hover_texture = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 		break;
 	case click_state:
 		ret->clicked_text = text;
-		ret->clicked_image = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
+		ret->clicked_texture = App->font->Print(text, { 255, 255, 255, 255 }, App->font->default);
 		break;
-	}*/
+	}
 	//Fill rect
+	ret->rect = new SDL_Rect;
+
 	ret->rect->x = x;
 	ret->rect->y = y;
 	ret->rect->w = strlen(text) * w;

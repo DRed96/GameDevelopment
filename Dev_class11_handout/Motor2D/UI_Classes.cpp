@@ -72,9 +72,32 @@ void UI_image::draw( img_state state) const
 		texture_rect = clicked_rect;
 		break;
 	}
-	App->render->Blit(idle_image, rect->x, rect->y, texture_rect);
+	App->render->Blit(texture, rect->x, rect->y, texture_rect);
 }
 
+void UI_image::addHoverRect(const int x, const int y, const int w, const int h)
+{
+	if (hover_rect == NULL)
+	{
+		hover_rect = new SDL_Rect;
+	}
+	hover_rect->x = x;
+	hover_rect->y = y;
+	hover_rect->w = w;
+	hover_rect->h = h;
+}
+
+void UI_image::addClickedRect(const int x, const int y, const int w, const int h)
+{
+	if (clicked_rect == NULL)
+	{
+		clicked_rect = new SDL_Rect;
+	}
+	clicked_rect->x = x;
+	clicked_rect->y = y;
+	clicked_rect->w = w;
+	clicked_rect->h = h;
+}
 //Label Methods----------------
 
 UI_label::UI_label() : idle_text(NULL), hover_text(NULL), clicked_text(NULL)

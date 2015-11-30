@@ -39,8 +39,8 @@ public:
 
 	// Gui creation functions
 	//They create a basic UI_image with a single texture
-	UI_image* createImage(SDL_Texture* image, int x, int y, int w, int h);
-	UI_image* createImage(SDL_Texture* image, SDL_Rect* rect, SDL_Rect* texture_rect,
+	UI_image* createImage( int x, int y, int w, int h);
+	UI_image* createImage( SDL_Rect* rect, SDL_Rect* texture_rect,
 						SDL_Rect* _hover_rect = NULL, SDL_Rect* _click_rect = NULL);
 
 	UI_label* createLabel(char* text, int x, int y, int w = 12, int h = 12, img_state type = idle_state);//12 is the standard typo size

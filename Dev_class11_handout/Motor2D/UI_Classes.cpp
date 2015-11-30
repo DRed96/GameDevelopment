@@ -1,7 +1,7 @@
 #include "UI_Classes.h"
 
 //General methods-------------
-void UI_element::draw(img_state state) const
+void UI_element::draw(SDL_Texture* _tex, img_state state) const
 {
 	return;
 }
@@ -45,7 +45,7 @@ ui_types UI_element::getType() const
 
 //Image Methods----------------
 
-UI_image::UI_image() : texture(NULL), idle_rect(NULL), hover_rect(NULL), clicked_rect(NULL)
+UI_image::UI_image() : idle_rect(NULL), hover_rect(NULL), clicked_rect(NULL)
 {
 	type = T_image;
 }
@@ -56,11 +56,10 @@ UI_image::~UI_image()
 	RELEASE(idle_rect);
 	RELEASE(hover_rect);
 	RELEASE(clicked_rect);
-	//Release Texture
-	RELEASE(texture);
+
 }
 //Render
-void UI_image::draw( img_state state) const
+void UI_image::draw(SDL_Texture* _tex, img_state state) const
 {
 	SDL_Rect* texture_rect = idle_rect;
 	switch (state)
@@ -72,7 +71,7 @@ void UI_image::draw( img_state state) const
 		texture_rect = clicked_rect;
 		break;
 	}
-	App->render->Blit(texture, rect->x, rect->y, texture_rect);
+	App->render->Blit(_tex, rect->x, rect->y, texture_rect,0);
 }
 
 void UI_image::addHoverRect(const int x, const int y, const int w, const int h)
@@ -109,7 +108,7 @@ UI_label::UI_label() : idle_text(NULL), hover_text(NULL), clicked_text(NULL)
 }
 
 //Render
-void UI_label::draw(img_state state) const
+void UI_label::draw( SDL_Texture* _tex, img_state state) const
 {
 	SDL_Texture* current_t = idle_texture;
 	switch (state)
@@ -123,7 +122,7 @@ void UI_label::draw(img_state state) const
 			current_t = clicked_texture;
 		break;
 	}
-	App->render->Blit(current_t, rect->x, rect->y);
+	App->render->Blit(current_t, rect->x, rect->y,NULL,0);
 }
 
 

@@ -22,6 +22,10 @@ class UI_element
 protected:
 	ui_types type;
 public:
+	int id;
+	//Rects
+	SDL_Rect* rect;
+public:
 	//Mouse state methods
 	bool isColliding() const;
 	bool isClicking() const;
@@ -29,17 +33,12 @@ public:
 	//Type Getter
 	ui_types getType() const;
 	//Render
-	virtual void draw( img_state state) const;
-public:
-	int id;
-	//Rects
-	SDL_Rect* rect;
+	virtual void draw(SDL_Texture*, img_state state) const;
+
 };
 
 struct UI_image : public UI_element
-{
-	SDL_Texture* texture;
-	
+{	
 	//Textures
 	SDL_Rect* idle_rect;
 	SDL_Rect* hover_rect;
@@ -49,7 +48,7 @@ public:
 	UI_image();
 	~UI_image();
 	//Render
-	void draw(img_state state) const;
+	void draw( SDL_Texture*, img_state state) const;
 	//Add Optional Rects
 	void addHoverRect(const int x, const int y, const int w, const int h);
 
@@ -70,7 +69,7 @@ struct UI_label : public UI_element
 	SDL_Texture* clicked_texture;
 
 	//Render
-	void draw(img_state state) const;
+	void draw(SDL_Texture*, img_state state) const;
 public:
 	UI_label();
 	~UI_label();

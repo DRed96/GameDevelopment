@@ -71,18 +71,19 @@ void j1Gui::render() const
 	img_state state = idle_state;
 	while (tmp != NULL)
 	{
-		//if (tmp == collided)
-		
-		switch (current)
+		if (tmp == collided)
 		{
-		case mouse_enter:
-			state = hover_state;
+			switch (current)
+			{
+			case mouse_enter:
+				state = hover_state;
 				break;
-		case mouse_click:
-			state = click_state;
+			case mouse_click:
+				state = click_state;
 				break;
+			}
 		}
-		tmp->data->draw(state);
+		tmp->data->draw(atlas, state);
 		tmp = tmp->next;
 	}
 	
@@ -91,13 +92,10 @@ void j1Gui::render() const
 // class Gui ---------------------------------------------------
 
 //Image factory methods
-UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
+UI_image* j1Gui::createImage( int x, int y, int w, int h)
 {
 	UI_image* ret;
 	ret = new UI_image();
-
-	
-	ret->texture = image;
 	
 	ret->rect->x = x;
 	ret->rect->y = y;
@@ -107,12 +105,11 @@ UI_image* j1Gui::createImage(SDL_Texture* image, int x, int y, int w, int h)
 	guis.add(ret);
 	return ret;
 }
-UI_image* j1Gui::createImage(SDL_Texture* image, SDL_Rect* _rect, SDL_Rect* _texture_rect, SDL_Rect* _hover_rect, SDL_Rect* _click_rect)
+UI_image* j1Gui::createImage( SDL_Rect* _rect, SDL_Rect* _texture_rect, SDL_Rect* _hover_rect, SDL_Rect* _click_rect)
 {
 	UI_image* ret;
 	ret = new UI_image();
 
-	ret->texture = image;
 	ret->rect = new SDL_Rect(*_rect);
 	ret->idle_rect = new SDL_Rect(*_texture_rect);
 	/*ret->hover_rect = new SDL_Rect(*_hover_rect);

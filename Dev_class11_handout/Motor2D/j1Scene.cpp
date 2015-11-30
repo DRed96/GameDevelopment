@@ -51,7 +51,7 @@ bool j1Scene::Start()
 //	SDL_Rect Trect3 = { 0, 113, 229, 69 };
 //	SDL_Rect Trect4 = { 411, 169, 229, 69 };
 
-	banner = App->gui->createImage(bannerTex, &rect1, &Trect2);
+	banner = App->gui->createImage(&rect1, &Trect2);
 	banner->addHoverRect(0, 113, 229, 69);
 	banner->addClickedRect(411, 169, 229, 69);
 

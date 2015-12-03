@@ -1,0 +1,61 @@
+﻿Build started 03/12/2015 19:40:34.
+     1>Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1FileSystem.cpp j1Fonts.cpp j1Gui.cpp j1Main.cpp j1App.cpp j1Audio.cpp j1Input.cpp j1Map.cpp j1Pathfinding.cpp j1PerfTimer.cpp j1Scene.cpp j1Timer.cpp p2Log.cpp j1Render.cpp j1Textures.cpp j1Window.cpp PugiXml\src\pugixml.cpp UI_Classes.cpp
+         UI_Classes.cpp
+         pugixml.cpp
+         j1Window.cpp
+         j1Textures.cpp
+         j1Render.cpp
+         p2Log.cpp
+         j1Timer.cpp
+         j1Scene.cpp
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1scene.cpp(98): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1scene.cpp(101): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1scene.cpp(104): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1scene.cpp(107): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
+         j1PerfTimer.cpp
+         j1Pathfinding.cpp
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\p2point.h(114): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+                 d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\p2point.h(110) : while compiling class template member function 'int p2Point<int>::DistanceTo(const p2Point<int> &) const'
+                 d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1pathfinding.cpp(160) : see reference to function template instantiation 'int p2Point<int>::DistanceTo(const p2Point<int> &) const' being compiled
+                 d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1pathfinding.h(81) : see reference to class template instantiation 'p2Point<int>' being compiled
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\p2point.h(114): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+         j1Map.cpp
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1map.cpp(107): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1map.cpp(108): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+         j1Input.cpp
+         j1Audio.cpp
+         j1App.cpp
+     1>d:\users\david\documents\github\gamedevelopment\dev_class11_ian\motor2d\j1app.cpp(223): warning C4018: '<' : signed/unsigned mismatch
+         j1Main.cpp
+         j1Gui.cpp
+         j1Fonts.cpp
+         j1FileSystem.cpp
+         Generating Code...
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.lib" /MACHINE:X86 Debug\j1FileSystem.obj
+         Debug\j1Fonts.obj
+         Debug\j1Gui.obj
+         Debug\j1Main.obj
+         Debug\j1App.obj
+         Debug\j1Audio.obj
+         Debug\j1Input.obj
+         Debug\j1Map.obj
+         Debug\j1Pathfinding.obj
+         Debug\j1PerfTimer.obj
+         Debug\j1Scene.obj
+         Debug\j1Timer.obj
+         Debug\p2Log.obj
+         Debug\j1Render.obj
+         Debug\j1Textures.obj
+         Debug\j1Window.obj
+         Debug\pugixml.obj
+         Debug\UI_Classes.obj
+            Creating library D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.lib and object D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.exp
+         Motor2D.vcxproj -> D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Debug\Development - Class 11.exe
+     1>Done Building Project "D:\Users\David\Documents\GitHub\GameDevelopment\Dev_class11_IAN\Motor2D\Motor2D.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:10.77

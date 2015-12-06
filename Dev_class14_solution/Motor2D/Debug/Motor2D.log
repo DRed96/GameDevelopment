@@ -1,0 +1,32 @@
+﻿Build started 29/11/2015 19:24:26.
+Project "C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Motor2D\Motor2D.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _ITERATOR_DEBUG_LEVEL=0 /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt j1Input.cpp
+  j1Input.cpp
+c:\upc\desenvolupament\development_class_14\dev_class14_solution\motor2d\j1input.cpp(127): warning C4018: '<' : signed/unsigned mismatch
+c:\upc\desenvolupament\development_class_14\dev_class14_solution\motor2d\j1input.cpp(140): warning C4018: '<' : signed/unsigned mismatch
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Debug\Development - Class 13.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Debug\Development - Class 13.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Debug\Development - Class 13.lib" /MACHINE:X86 Debug\Gui.obj
+  Debug\j1FileSystem.obj
+  Debug\j1Fonts.obj
+  Debug\j1Gui.obj
+  Debug\j1Main.obj
+  Debug\j1App.obj
+  Debug\j1Audio.obj
+  Debug\j1Input.obj
+  Debug\j1Map.obj
+  Debug\j1Pathfinding.obj
+  Debug\j1PerfTimer.obj
+  Debug\j1Scene.obj
+  Debug\j1Timer.obj
+  Debug\p2Log.obj
+  Debug\j1Render.obj
+  Debug\j1Textures.obj
+  Debug\j1Window.obj
+  Debug\pugixml.obj
+  Motor2D.vcxproj -> C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Debug\Development - Class 13.exe
+Done Building Project "C:\UPC\Desenvolupament\Development_class_14\Dev_class14_solution\Motor2D\Motor2D.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.46

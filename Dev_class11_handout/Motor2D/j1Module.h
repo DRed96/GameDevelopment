@@ -9,18 +9,6 @@
 #include "p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
 
-class UI_element;
-
-enum gui_events
-{
-	mouse_idle,
-	mouse_enter,
-	mouse_leave,
-	mouse_click,
-	mouse_unclick,
-	mouse_drag
-};
-
 class j1App;
 
 class j1Module
@@ -84,10 +72,6 @@ public:
 		return true;
 	}
 
-	virtual void guiReviever(gui_events g_event, UI_element * element)
-	{
-		return;
-	}
 public:
 
 	p2SString	name;
